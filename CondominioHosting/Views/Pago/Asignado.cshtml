@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Asignado";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+
+<h2>Asignado</h2>
+

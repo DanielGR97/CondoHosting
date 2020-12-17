@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../../Resources/CSS/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../Resources/CSS/Base.css">
+    <script src="../../Resources/JS/jquery-3.2.1.min.js"></script>
+    <script src="~/Resources/JS/moment.min.js"></script>
+    <script src="../../Resources/JS/jquery.maskedinput.js"></script>
+    <script src="../../Resources/JS/main.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"    
+          rel="stylesheet">
+    <script src="../../Resources/JS/bootstrap.bundle.js" charset="utf-8"></script>
+    <link rel="shortcut icon" href="../../Resources/IMG/favicon.ico">
+    @*<link href='../fullcalendar.min.css' rel='stylesheet' />
+    <link href='../fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    <script src='../lib/moment.min.js'></script>
+    <script src='../lib/jquery.min.js'></script>
+    <script src='../fullcalendar.min.js'></script>*@
+
+    @*<link href="~/Resources/CSS/fullcalendar.min.css" rel="stylesheet" />
+    <link href="~/Resources/CSS/fullcalendar.print.min.css" rel="stylesheet" media="print" />
+    <script src="~/Resources/JS/jquery.min.js"></script>
+    <script src="~/Resources/JS/moment.min.js"></script>
+    <script src="~/Resources/JS/fullcalendar.min.js"></script>*@
+ 
+    @RenderSection("css", required: false)
+
+    @RenderSection("script", required: false)
+</head>
+<body>
+    <header>
+        <div id="usuario">
+            <div id="nombreUsuario">
+                <label>@RenderSection("user", required: false)</label> 
+            </div>
+            <a href="@Url.Action("Index", "Home")">Salir</a>
+            <img src="../../Resources/IMG/user.png">
+        </div>
+    </header>
+
+
+    <div class="container-fluid principal">
+        <div class="row">
+
+            <div class="col-lg-2 side">
+                <div class="panel-group" id="accordion">
+
+                    @if (User.IsInRole("Inquilino") || User.IsInRole("Admin"))
+                    {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                               <p data-toggle="collapse" data-parent="#accordion" href="#collapse1"><i class="material-icons">account_circle</i> Inquilinos</p>
+                            </h5>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse in">
+                            <ul class="list-group">
+                                <li class="list-group-item"><a href="@Url.Action("Index", "Inquilinos")">Inquilinos</a></li>
+                                <li class="list-group-item"><a href="@Url.Action("Index", "Pago")">Asignar propiedad</a></li>
+                                <li class="list-group-item"><a href="@Url.Action("Renta", "Pago")">Renta</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    } 
+
+                    @if (User.IsInRole("IngresosYGastos") || User.IsInRole("Admin"))
+                    {
+                    <div class="panel panel-default" id="titulos">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                                <p data-toggle="collapse" data-parent="#accordion" href="#collapse2"><i class="material-icons">attach_money</i> Ingresos y Gastos</p>
+                            </h5>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse in">
+                            <ul class="list-group">
+                                <li class="list-group-item"><a href="@Url.Action("Index", "Ingresos")">Ingresos</a></li>
+                                <li class="list-group-item"><a href="@Url.Action("Index", "Gastos")">Gastos</a></li>
+                                <li class="list-group-item"><a href="@Url.Action("Index", "TipoIngresos")">Tipos Ingresos</a></li>
+                                <li class="list-group-item"><a href="@Url.Action("Index", "TipoGastos")">Tipos Gastos</a></li>
+                            </ul>
+                        </div>
+                    </div> 
+                    
+                    }
+                    @if (User.IsInRole("Reclamaciones") || User.IsInRole("Admin"))
+                    {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                                <p data-toggle="collapse" data-parent="#accordion" href="#collapse3"><a href="@Url.Action("Index", "Reclamaciones")"><i class="material-icons">description</i> Reclamaciones </a></p>
+                            </h5>
+                        </div>
+                    </div>
+                    
+                    }
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                                <p data-toggle="collapse" data-parent="#accordion" href="#collapse4"><i class="material-icons">home</i> Edificaciones</p>
+                            </h5>
+                        </div>
+                        <div id="collapse4" class="panel-collapse collapse in">
+                            <ul class="list-group">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                <li class="list-group-item"><a href="@Url.Action("Index", "Condominio")">Condominios</a></li>
+                                }
+                                @if (User.IsInRole("Propiedades") || User.IsInRole("Admin"))
+                                {
+                                <li class="list-group-item"><a href="@Url.Action("Index", "Propiedades")">Propiedades</a></li>
+                                }
+                                @if (User.IsInRole("Instalaciones") || User.IsInRole("Admin"))
+                                {
+                                <li class="list-group-item"><a href="@Url.Action("Index", "Instalaciones")">Instalaciones</a></li>
+                                }
+                                @if (User.IsInRole("Propiedades,Instalaciones") || User.IsInRole("Admin"))
+                                {
+                                    <li class="list-group-item"><a href="@Url.Action("Index", "Mantenimiento")">Mantenimientos</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    @if (User.IsInRole("Presupuestos") || User.IsInRole("Admin"))
+                    {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                                <p data-toggle="collapse" data-parent="#accordion" href="#collapse5"><a href="@Url.Action("Index", "Presupuestos")"><i class="material-icons">account_balance</i> Presupuestos</a></p>
+                            </h5>
+                        </div>
+                    </div>
+                    
+                    }
+                    @if (User.IsInRole("Eventos") || User.IsInRole("Admin"))
+                    {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                                <p data-toggle="collapse" data-parent="#accordion" href="#collapse6"><a href="@Url.Action("Index", "Evento")"><i class="material-icons">event</i> Eventos</a></p>
+                            </h5>
+                        </div>
+                    </div>
+                    
+                    }
+                    @if (User.IsInRole("Empleados") || User.IsInRole("Admin"))
+                    {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                                <p data-toggle="collapse" data-parent="#accordion" href="#collapse7"><a href="#collapse7"><i class="material-icons">accessibility</i> Empleados</a></p>
+                            </h5>
+                        </div>
+                        <div id="collapse7" class="panel-collapse collapse in">
+                            <ul class="list-group">
+                                <li class="list-group-item"><a href="@Url.Action("Index", "Empleado")">Empleados</a></li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                <li class="list-group-item"><a href="@Url.Action("Index", "Rol")">Roles</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    }
+                    @if (User.IsInRole("Contratistas") || User.IsInRole("Admin"))
+                    {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                                <p data-toggle="collapse" data-parent="#accordion" href="#collapse8"><a href="@Url.Action("Index", "Contratista")"><i class="material-icons">build</i> Contratistas</a></p></h5>
+                        </div>
+                    </div>
+                    }
+                    
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <p data-toggle="collapse" data-parent="#accordion" href="#collapse5"><a href="@Url.Action("Reporte", "Home")"><i class="material-icons">list</i> Reportes</a></p>
+                                </h5>
+                            </div>
+                        </div>
+                       
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                                <p data-toggle="collapse" data-parent="#accordion" href="#collapse5"><a href="@Url.Action("Index", "Servicios")"><i class="material-icons">featured_play_list</i> Servicios</a></p>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mx-auto col-lg-10 seccion">
+
+                <section>
+                    @RenderBody()
+                </section>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

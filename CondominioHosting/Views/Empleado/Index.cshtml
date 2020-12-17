@@ -1,0 +1,424 @@
+﻿
+@{
+    ViewBag.Title = "Empleado";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>  
+           @ViewBag.CondominioNombre
+        </span>
+    }    
+}
+
+<div id="header">
+    <h3>Empleados</h3>
+    <br>
+    <input type="text" id="Buscar" name="" placeholder="Ingrese el dato a buscar:">
+</div>
+
+<hr>
+
+<table id="FullTable">
+    <tr>
+        <th>Condominio</th>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+        <th>Dirección</th>
+        <th>Rol</th>
+        <th>Mas</th>
+
+
+    </tr>
+
+    <tbody id="Tabla">
+        @foreach (CondominioHosting.Models.BusquedaEmpleadoProcResult per in ViewBag.listado)
+        {
+            <tr>
+                <td>@per.CondominioNombre</td>
+                <td>@per.PersonaNombre @per.PersonaApellido</td>
+                <td>@per.PersonaTelefono</td>
+                <td>@per.PersonaDireccion</td>
+                <td>@per.Descripcion</td>
+                <td>
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+
+                        <div class="dropdown-menu">
+                            <a href="#ventana1" data-toggle="modal" class="dropdown-item mod" value="@per.PersonaId">Modificar</a>
+                            <a href="#ventana2" data-toggle="modal" class="dropdown-item des" value="@per.PersonaId">Deshabilitar</a>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+
+
+
+
+
+
+
+</table>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Modificar Empleados</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form id="Modificar" onsubmit="return isValidForm()">
+
+                    <label>Nombre:</label>
+                    <input type="text" id="Nombre" name="PersonaNombre" class="form-control" maxlength="50" required pattern="[ a-zA-Z_-]{2,40}"  title="Solo las letras estan permitidas">
+                    <label>Apellido:</label>
+                    <input type="text" id="Apellido" name="PersonaApellido" class="form-control" maxlength="50" required pattern="[ a-zA-Z_-]{2,40}"  title="Solo las letras estan permitidas">
+                    <label>Fecha de nacimiento:</label>
+                    <input type="date" id="FechaNacimiento2" class="form-control" name="PersonaFechaNacimiento" required>
+                    <label>Sexo:</label>
+                    <select class="form-control" id="Sexo" name="PersonaSexoId">
+                        @foreach (CondominioHosting.Models.SexoTable sexo in ViewBag.sexo)
+                        {
+                            <option value="@sexo.SexoId">@sexo.SexoDescripcion</option>
+                        }
+                    </select>
+                    <label>Cédula:</label>
+                    <input type="text" id="Documento" name="PersonaDocumento" class="cedula form-control" required><br>
+                    <label>Teléfono:</label>
+                    <input type="text" Id="Telefono" name="PersonaTelefono" class="telefono form-control" required>
+                    <label>Nacionalidad:</label>
+                    <select class="form-control" id="Nacionalidad" name="PersonaNacionalidad">
+                        @foreach (CondominioHosting.Models.NacionalidadTable nac in ViewBag.nacion)
+                        {
+                            <option value="@nac.NacionalidadId">@nac.NacionalidadNombre</option>
+                        }
+                    </select>
+                    <label>Dirección:</label><br>
+                    <textarea class="form-control" id="Direccion" name="PersonaDireccion" required></textarea>
+                    <label>Sueldo:</label>
+                    <input type="number" id="Sueldo" name="PersonaSueldo" class="form-control" required />
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <label>Administrador:</label>
+                        <select class="form-control" name="PersonaTipoId">
+                            <option value="3">No</option>
+                            <option value="2">Si</option>
+                        </select>
+                    }
+                    @if (User.IsInRole("Empleados"))
+                    {
+                        <input type="hidden" value="3" name="PersonaTipoId" />
+                    }
+                    <label>Rol:</label>
+                    <select class="form-control" id="Rol" name="PersonaRolId" >
+                        @foreach (CondominioHosting.Models.BusquedaRolEmProcResult Rol in ViewBag.rol)
+                        {
+                            <option value="@Rol.RolId">@Rol.Descripcion</option>
+                        }
+                    </select><br>
+
+
+                    <input id="modificar" type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ventana2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deshabilitar empleado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Esta seguro que desea deshabilitar el empleado? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="deshabilitar" type="button" class="btn btn-primary" data-dismiss="modal">Deshabilitar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana3">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="Empleados">
+            <div class="modal-header">
+
+                <h4>Registrar empleados</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Empleado/Index" id="Registrar" onsubmit="return isValidForm()">
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                    <label>Condominio:</label>
+                    <select class="form-control" name="PersonaCondominioId" id="CondominioS">
+                        @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Ct in ViewBag.condominio)
+                        {
+                            <option value="@Ct.CondominioId">@Ct.CondominioNombre</option>
+                        }
+                    </select>
+                    }
+                    @if (User.IsInRole("Empleados"))
+                    {
+                        <input type="hidden" name="PersonaCondominioId" value="@ViewBag.CondominioId" />
+                    }
+                    <label>Nombre:</label>
+                    <input type="text" name="PersonaNombre"   class="form-control" maxlength="50" required pattern="[ a-zA-Z_-]{2,40}"  title="Solo las letras estan permitidas">
+                    <label>Apellido:</label>
+                    <input type="text" name="PersonaApellido"  class="form-control" maxlength="50" required pattern="[ a-zA-Z_-]{2,40}"  title="Solo las letras estan permitidas">
+                    <label>Fecha de nacimiento:</label>
+                    <input type="date" id="FechaNacimiento" class="form-control" name="PersonaFechaNacimiento" requiered>
+                    <label>Correo:</label>
+                    <input type="email" class="form-control" name="PersonaCorreo" requiered>
+                    <label>Sexo:</label>
+                    <select class="form-control" name="PersonaSexoId">
+                        @foreach (CondominioHosting.Models.SexoTable sexo in ViewBag.sexo)
+                        {
+                            <option value="@sexo.SexoId">@sexo.SexoDescripcion</option>
+                        }
+                    </select>
+                    <label>Cédula:</label>
+                    <input type="text"  name="PersonaDocumento" class="cedula form-control" required><br>
+                    <label>Teléfono:</label>
+                    <input type="text"  name="PersonaTelefono" class="telefono form-control" required>
+                    <label>Nacionalidad:</label>
+                    <select class="form-control" name="PersonaNacionalidad">
+                        @foreach (CondominioHosting.Models.NacionalidadTable nac in ViewBag.nacion)
+                        {
+                            <option value="@nac.NacionalidadId">@nac.NacionalidadNombre</option>
+                        }
+                    </select>
+                    <label>Dirección:</label><br>
+                    <textarea class="form-control" name="PersonaDireccion" required></textarea>
+                    <label>Sueldo:</label>
+                    <input type="number" name="PersonaSueldo" class="form-control" required />  
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <label>Administrador:</label>
+                        <select class="form-control" name="PersonaTipoId">
+                            <option value="3">No</option>
+                            <option value="2">Si</option>
+                        </select>
+                    }
+                    @if (User.IsInRole("Empleados"))
+                    {
+                        <input type="hidden" value="3" name="PersonaTipoId" />
+                    }    
+                    <label>Rol:</label>
+                    <select class="form-control" name="PersonaRolId" id="SelectRol">
+                        @foreach (CondominioHosting.Models.BusquedaRolEmProcResult Rol in ViewBag.rol)
+                        {
+                            <option value="@Rol.RolId">@Rol.Descripcion</option>
+                        }
+                    </select><br>
+                    <input type="hidden" name="PersonaActivo" value="true" />
+                    <input type="hidden" value="true" name="PersonaActivo" />
+                    <input type="hidden" value="@DateTime.Now" name="PersonaFechaEntrada" />
+                    <input type="hidden" value="123" name="PersonaContra" />
+                    @*<input type="submit" class="btn btn-secondary" name="Agregar rol"><br>*@
+
+                    <input type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<a href="#ventana3" id="btn-agregar" class="btn btn-success" data-toggle="modal">Agregar</a>
+
+@section script{
+
+<script>
+
+    $(function ($) {
+
+        $(".telefono").mask("(999)-999-9999");
+        $(".cedula").mask("999-9999999-9");
+
+
+        linea = 0;
+        $("#addDetail").on("click", function () {
+            template = "<tr><td> {3} <input type='hidden' name='RolTable[{0}][RolId]' value='{1}' /></td></tr>";
+            template = template.replace("{0}", linea);
+            template = template.replace("{1}", $("#Descripcion").val());
+            template = template.replace("{3}", $("#Descripcion option:selected").text());
+            linea = linea + 1;
+            $("#Detalle").append(template);
+
+        });
+
+    });
+
+    var id;
+    $(document).ready(function () {
+
+        $('#CondominioS').on("change", function (e) {
+            $('#SelectRol option').remove();
+            var IdCondominio = $('#CondominioS').val();
+            if (IdCondominio > 0) {
+                var datos = { "condominio": IdCondominio };
+                $.ajax({
+                    type: "GET",
+                    url: "/Empleado/CambiarCombo/",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: datos,
+                    success: function (data) {
+                        debugger;
+                        if (data != null)
+
+                        $.each(data, function (key, value) {
+
+                            $("#SelectRol").append("<option value=" + value.RolId + ">" + value.Descripcion + "</option>");
+                        });
+
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+                });
+            } else {
+
+            }
+
+        });
+
+        $(".des").on("click", function () {
+            id = $(this).attr("value");
+        });
+
+
+
+        $("#deshabilitar").on("click", function () {
+            var data;
+            $.ajax({ method: "POST", url: "/Empleado/Deshacer/" + id, data: data });
+            $("#FullTable").load(" #FullTable");
+
+        });
+
+        $(".mod").on("click", function () {
+            id = $(this).attr("value");
+            var data;
+            $.ajax({
+                method: "GET", url: "/Empleado/ObtenerDatos/" + id, data: data,
+                success: function (data) {
+                    debugger;
+                    document.getElementById('Nombre').value = data.nombre;
+                    document.getElementById('Apellido').value = data.apellido;
+                    document.getElementById('FechaNacimiento2').value = data.nacimiento;                
+                    document.getElementById('Sexo').value = data.sexo;
+                    document.getElementById('Documento').value = data.documento;
+                    document.getElementById('Telefono').value = data.telefono;
+                    document.getElementById('Sueldo').value = data.sueldo;
+                    document.getElementById('Nacionalidad').value = data.nacionalidad;
+                    document.getElementById('Direccion').value = data.direccion;
+                    document.getElementById('Rol').value = data.rol;
+                },
+                error: function (data) {
+                    debugger;
+                    alert('error');
+                }
+
+            });
+
+        });
+
+        $("#modificar").on("click", function () {
+            var nombre = document.getElementById('Nombre').value;
+            var apellido = document.getElementById('Apellido').value;
+            var nacimiento = document.getElementById('FechaNacimiento2').value
+            var sexo = document.getElementById('Sexo').value;
+            var documento = document.getElementById('Documento').value;
+            var telefono = document.getElementById('Telefono').value;
+            var sueldo = document.getElementById('Sueldo').value;
+            var nacionalidad = document.getElementById('Nacionalidad').value;
+            var direccion = document.getElementById('Direccion').value;
+            var rol = document.getElementById('Rol').value;
+            var data2 = {"nombre": nombre, "apellido": apellido, "nacimiento": nacimiento, "sexo": sexo, "documento": documento, "telefono": telefono, "sueldo": sueldo, "nacionalidad": nacionalidad, "direccion": direccion, "rol": rol };
+            $.ajax({ method: "POST", url: "/Empleado/Modificar/" + id, data: data2 });
+            debugger;
+        });
+
+        $("#Buscar").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#Tabla tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        document.getElementById("Registrar").onsubmit = function () {
+
+            var x = document.getElementById("FechaNacimiento").valueAsDate;
+            var nacimiento = moment(x);
+            var hoy = moment();
+            var anios = hoy.diff(nacimiento, "years");
+
+            if (anios < 18) {
+                
+               
+                alert("Usted no es mayor de edad");
+                return false;
+            } else {
+                return true;
+            }
+        };
+
+        document.getElementById("Modificar").onsubmit = function () {
+
+            var x2 = document.getElementById("FechaNacimiento2").valueAsDate;
+            var nacimiento2 = moment(x);
+            var hoy2 = moment();
+            var anios2 = hoy.diff(nacimiento, "years");
+
+            if (anios2 < 18) {
+
+
+                alert("Usted no es mayor de edad");
+                return false;
+            } else {
+                return true;
+            }
+        };
+
+    });
+
+   
+    </script>
+}

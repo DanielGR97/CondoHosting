@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "RegistroPropiedadServicios";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+<form>
+    <h4>Registro propiedades y servicios</h4>
+    <br>
+    <label>Nombre Inquilino</label>
+    <input type="text" name="" disabled="" class="form-control">
+    <br>
+    <label>Propiedades</label><br>
+    <select class="form-control">
+        <option>1-A</option>
+        <option>1-B</option>
+        <option>2-A</option>
+        <option>2-B</option>
+        <option>3-A</option>
+        <option>3-B</option>
+    </select>
+    <br>
+    <button class="btn btn-secondary">Agregar propiedad</button>
+    <hr>
+    <label>Servicios</label><br>
+    <select class="form-control">
+        <option>Agua potable</option>
+        <option>Energia electrica</option>
+        <option>Recogida de basura</option>
+        <option>Pintura periodicamente</option>
+    </select>
+    <br>
+    <button class="btn btn-secondary">Agregar Servicios</button>
+
+
+</form>
+
+<a href="#ventana3" id="btn-agregar" class="btn btn-success" data-toggle="modal">Guardar</a>
+
+
+

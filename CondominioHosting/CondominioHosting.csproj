@@ -1,0 +1,579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B17C7631-9F00-4190-84CF-E8D1DEE4212E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CondominioHosting</RootNamespace>
+    <AssemblyName>CondominioHosting</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="InquilnosActivos.aspx" />
+    <Content Include="ReportContratistas.aspx" />
+    <Content Include="Reporte de Gastos.aspx" />
+    <Content Include="ReporteEjemplo.aspx" />
+    <Content Include="ReporteEmpleados.aspx" />
+    <Content Include="ReporteIngresos.aspx" />
+    <Content Include="ReportePropiedades.aspx" />
+    <Content Include="Reportes\ContratoArrendamiento.aspx" />
+    <Content Include="ReporteTIng.aspx" />
+    <Content Include="ReporteTipoGastos.aspx" />
+    <Content Include="Resources\CSS\bootstrap.css" />
+    <Content Include="Resources\CSS\calendario.css" />
+    <Content Include="Resources\CSS\Base.css" />
+    <Content Include="Resources\CSS\Estilo.css" />
+    <Content Include="Resources\CSS\eventos.css" />
+    <Content Include="Resources\CSS\fullcalendar.min.css" />
+    <Content Include="Resources\CSS\fullcalendar.print.min.css" />
+    <Content Include="Resources\CSS\MainBitch.css" />
+    <Content Include="Resources\CSS\mantenimiento.css" />
+    <Content Include="Resources\CSS\MetodoPago.css" />
+    <Content Include="Resources\CSS\Pago.css" />
+    <Content Include="Resources\IMG\ic_credit_card_black_24dp_1x.png" />
+    <Content Include="Resources\JS\moment.min.js" />
+    <Content Include="Resources\CSS\Principal.css" />
+    <Content Include="Resources\CSS\Registrar.css" />
+    <Content Include="Resources\CSS\RegistroInqulinos.css" />
+    <Content Include="Resources\CSS\RegistroUsuarios.css" />
+    <Content Include="Resources\IMG\favicon.ico" />
+    <Content Include="Resources\IMG\logo.png" />
+    <Content Include="Resources\IMG\user.png" />
+    <Content Include="Resources\JS\bootstrap.bundle.js" />
+    <Content Include="Resources\JS\fullcalendar.js" />
+    <Content Include="Resources\JS\fullcalendar.min.js" />
+    <Content Include="Resources\JS\gcal.js" />
+    <Content Include="Resources\JS\jquery-3.2.1.min.js" />
+    <Content Include="Resources\JS\jquery-ui.min.js" />
+    <Content Include="Resources\JS\jquery.js" />
+    <Content Include="Resources\JS\jquery.maskedinput.js" />
+    <Content Include="Resources\JS\jquery.min.js" />
+    <Content Include="Resources\JS\main.js" />
+    <Content Include="Resources\JS\moment.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CondominioHostingDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CondominioHostingDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BuscarInquilinoController.cs" />
+    <Compile Include="Controllers\CondominioController.cs" />
+    <Compile Include="Controllers\ContratistaController.cs" />
+    <Compile Include="Controllers\EmpleadoController.cs" />
+    <Compile Include="Controllers\EventoController.cs" />
+    <Compile Include="Controllers\GastosController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IngresosController.cs" />
+    <Compile Include="Controllers\InquilinosController.cs" />
+    <Compile Include="Controllers\InstalacionesController.cs" />
+    <Compile Include="Controllers\MantenimientoController.cs" />
+    <Compile Include="Controllers\MembresiaController.cs" />
+    <Compile Include="Controllers\PagoController.cs" />
+    <Compile Include="Controllers\PresupuestosController.cs" />
+    <Compile Include="Controllers\PropiedadesController.cs" />
+    <Compile Include="Controllers\ReclamacionesController.cs" />
+    <Compile Include="Controllers\RolController.cs" />
+    <Compile Include="Controllers\ServiciosController.cs" />
+    <Compile Include="Controllers\TipoGastosController.cs" />
+    <Compile Include="Controllers\TipoIngresosController.cs" />
+    <Compile Include="DataSetContratistas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetContratistas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetEmpleados.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetEmpleados.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetGastos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetGastos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetIngresos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetIngresos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetInquilinos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetInquilinos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetPropAl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetPropAl.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetTg.cs">
+      <DependentUpon>DataSetTg.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetTg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetTg.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetTipIng.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetTipIng.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="InquilnosActivos.aspx.cs">
+      <DependentUpon>InquilnosActivos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InquilnosActivos.aspx.designer.cs">
+      <DependentUpon>InquilnosActivos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBaseCodominium.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataBaseCodominium.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Security\MembreshipPro.cs" />
+    <Compile Include="Models\Security\roleprovider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportContratistas.aspx.cs">
+      <DependentUpon>ReportContratistas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportContratistas.aspx.designer.cs">
+      <DependentUpon>ReportContratistas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte de Gastos.aspx.cs">
+      <DependentUpon>Reporte de Gastos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reporte de Gastos.aspx.designer.cs">
+      <DependentUpon>Reporte de Gastos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteEjemplo.aspx.cs">
+      <DependentUpon>ReporteEjemplo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteEjemplo.aspx.designer.cs">
+      <DependentUpon>ReporteEjemplo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteEmpleados.aspx.cs">
+      <DependentUpon>ReporteEmpleados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteEmpleados.aspx.designer.cs">
+      <DependentUpon>ReporteEmpleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteIngresos.aspx.cs">
+      <DependentUpon>ReporteIngresos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteIngresos.aspx.designer.cs">
+      <DependentUpon>ReporteIngresos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportePropiedades.aspx.cs">
+      <DependentUpon>ReportePropiedades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportePropiedades.aspx.designer.cs">
+      <DependentUpon>ReportePropiedades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ContratoArrendamiento.aspx.cs">
+      <DependentUpon>ContratoArrendamiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\ContratoArrendamiento.aspx.designer.cs">
+      <DependentUpon>ContratoArrendamiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteTIng.aspx.cs">
+      <DependentUpon>ReporteTIng.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteTIng.aspx.designer.cs">
+      <DependentUpon>ReporteTIng.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteTipoGastos.aspx.cs">
+      <DependentUpon>ReporteTipoGastos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteTipoGastos.aspx.designer.cs">
+      <DependentUpon>ReporteTipoGastos.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Share\_BaseLayout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Condominio\Index.cshtml" />
+    <Content Include="Views\Evento\Index.cshtml" />
+    <Content Include="Views\Instalaciones\Index.cshtml" />
+    <Content Include="Views\Propiedades\Index.cshtml" />
+    <Content Include="Views\Presupuestos\Index.cshtml" />
+    <Content Include="Views\Reclamaciones\Index.cshtml" />
+    <Content Include="Views\TipoGastos\Index.cshtml" />
+    <Content Include="Views\TipoIngresos\Index.cshtml" />
+    <Content Include="Views\Ingresos\Index.cshtml" />
+    <Content Include="Views\Gastos\Index.cshtml" />
+    <Content Include="Views\Empleado\Index.cshtml" />
+    <Content Include="Views\Inquilinos\Index.cshtml" />
+    <Content Include="Views\Inquilinos\RegistroPropiedadServicios.cshtml" />
+    <Content Include="Views\Inquilinos\RegistrarInquilino.cshtml" />
+    <Content Include="CondominioHostingDataSet.xsc">
+      <DependentUpon>CondominioHostingDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="CondominioHostingDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CondominioHostingDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="CondominioHostingDataSet.xss">
+      <DependentUpon>CondominioHostingDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetGastos.xsc">
+      <DependentUpon>DataSetGastos.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetEmpleados.xsc">
+      <DependentUpon>DataSetEmpleados.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContratistas.xsc">
+      <DependentUpon>DataSetContratistas.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContratistas.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetContratistas.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSetContratistas.xss">
+      <DependentUpon>DataSetContratistas.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetEmpleados.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetEmpleados.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSetEmpleados.xss">
+      <DependentUpon>DataSetEmpleados.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetGastos.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetGastos.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSetGastos.xss">
+      <DependentUpon>DataSetGastos.xsd</DependentUpon>
+    </Content>
+    <Content Include="Views\BuscarInquilino\Index.cshtml" />
+    <Content Include="DataSetIngresos.xsc">
+      <DependentUpon>DataSetIngresos.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetIngresos.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetIngresos.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSetIngresos.xss">
+      <DependentUpon>DataSetIngresos.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetInquilinos.xsc">
+      <DependentUpon>DataSetInquilinos.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetInquilinos.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetInquilinos.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSetInquilinos.xss">
+      <DependentUpon>DataSetInquilinos.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetPropAl.xsc">
+      <DependentUpon>DataSetPropAl.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetPropAl.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetPropAl.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSetPropAl.xss">
+      <DependentUpon>DataSetPropAl.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetTg.xsc">
+      <DependentUpon>DataSetTg.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetTg.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetTg.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSetTg.xss">
+      <DependentUpon>DataSetTg.xsd</DependentUpon>
+    </Content>
+    <Content Include="Resources\PHP\get-events.php" />
+    <Content Include="Resources\PHP\get-timezones.php" />
+    <Content Include="Resources\PHP\utils.php" />
+    <Content Include="DataSetGastos.xsc">
+      <DependentUpon>DataSetGastos.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetEmpleados.xsc">
+      <DependentUpon>DataSetEmpleados.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetEmpleados.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetEmpleados.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSetEmpleados.xss">
+      <DependentUpon>DataSetEmpleados.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetGastos.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetGastos.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSetGastos.xss">
+      <DependentUpon>DataSetGastos.xsd</DependentUpon>
+    </Content>
+    <Content Include="Views\BuscarInquilino\Index.cshtml" />
+    <Content Include="DataSetIngresos.xsc">
+      <DependentUpon>DataSetIngresos.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetIngresos.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetIngresos.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSetIngresos.xss">
+      <DependentUpon>DataSetIngresos.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetPropAl.xsc">
+      <DependentUpon>DataSetPropAl.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetPropAl.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetPropAl.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSetPropAl.xss">
+      <DependentUpon>DataSetPropAl.xsd</DependentUpon>
+    </Content>
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Pago\Index.cshtml" />
+    <Content Include="Views\Mantenimiento\Index.cshtml" />
+    <Content Include="Models\DataBaseCodominium.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataBaseCodominium.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="DataSetTipIng.xsc">
+      <DependentUpon>DataSetTipIng.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetTipIng.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetTipIng.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSetTipIng.xss">
+      <DependentUpon>DataSetTipIng.xsd</DependentUpon>
+    </Content>
+    <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\Home\Reporte.cshtml" />
+    <Content Include="Views\Mantenimiento\Index.cshtml" />
+    <Content Include="Views\Servicios\Index.cshtml" />
+    <Content Include="Views\Contratista\Index.cshtml" />
+    <Content Include="Views\Pago\Renta.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Buscar\" />
+    <Folder Include="Views\Membresia\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\DataBaseCodominium.dbml.layout">
+      <DependentUpon>DataBaseCodominium.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Report1.rdlc" />
+    <EmbeddedResource Include="ReportContratistas.rdlc" />
+    <EmbeddedResource Include="ReportEmpleado.rdlc" />
+    <EmbeddedResource Include="Reportes\ReporteAlquiler.rdlc" />
+    <EmbeddedResource Include="ReportG.rdlc" />
+    <EmbeddedResource Include="ReportIngresos.rdlc" />
+    <EmbeddedResource Include="ReportInquilinos.rdlc" />
+    <EmbeddedResource Include="ReportPropiedadesAlquiladas.rdlc" />
+    <EmbeddedResource Include="ReportTIn.rdlc" />
+    <EmbeddedResource Include="ReportTipoGastos.rdlc" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55093</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55093/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

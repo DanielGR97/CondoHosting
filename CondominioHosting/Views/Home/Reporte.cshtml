@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Reportes";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<script>
+    $(document).ready(function () {
+        var IdCondominio = $('#CondominioS').val();
+        var datos = { "condominio": IdCondominio };
+        $.ajax({
+            type: "GET",
+            url: "/Home/CambiarCombo/",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: datos,
+            success: function (data) {
+                
+
+            },
+            error: function (data) {
+                debugger;
+                alert('error');
+            }
+        });
+
+        $('#CondominioS').on("change", function (e) {
+            var IdCondominio = $('#CondominioS').val();
+            var datos = { "condominio": IdCondominio };
+            $.ajax({
+                type: "GET",
+                url: "/Home/CambiarCombo/",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: datos,
+                success: function (data) {
+
+
+                },
+                error: function (data) {
+                    debugger;
+                    alert('error');
+                }
+            });
+
+        });
+    });
+</script>
+
+
+
+
+<h2>Reportes</h2>
+<br />
+<div class="container">
+
+    @if (User.IsInRole("Admin"))
+    {
+        <label>Condominio:</label>
+                    <select class="form-control" name="" id="CondominioS">
+                        @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Ct in ViewBag.condominio)
+                        {
+                            <option value="@Ct.CondominioId">@Ct.CondominioNombre</option>
+                        }
+                    </select>
+
+                    <br /> <br />
+    }
+
+    <div class="row">
+        <div class="col">
+            @if (User.IsInRole("IngresosYGastos") || User.IsInRole("Admin"))
+            {
+                <h5 style="color:black;">Reportes de Gastos</h5>
+                <a href="~/ReporteTipoGastos.aspx" target="_blank">Tipos de Gastos</a><br />
+                <a href="~/Reporte de Gastos.aspx" target="_blank">Gastos</a><br />
+                <br />
+
+                <h5 style="color:black;">Reportes de Ingresos</h5>
+                <a href="~/ReporteTIng.aspx" target="_blank">Tipos de Ingresos</a><br />
+                <a href="~/ReporteIngresos.aspx" target="_blank">Ingresos</a><br />
+                <br />
+            }
+            @if (User.IsInRole("Empleados") || User.IsInRole("Admin"))
+            {
+                <h5 style="color:black;">Reportes de Empleados</h5>
+                <a href="~/ReporteEmpleados.aspx" target="_blank">Empleados Activos</a><br />
+                <br />
+            }
+        </div>
+
+        <div class="col">
+        @if (User.IsInRole("Contratistas") || User.IsInRole("Admin"))
+        {
+            <h5 style="color:black;">Reportes de Contratistas</h5>
+            <a href="~/ReportContratistas.aspx" target="_blank">Contratistas Activos</a><br />
+            <br />
+        }
+        @if (User.IsInRole("Admin"))
+        {
+            <h5 style="color:black;">Reportes Propiedades</h5>
+            <a href="~/ReportePropiedades.aspx" target="_blank">Propiedades del condominio</a><br />
+            <br />
+            <br />
+        }
+        @if (User.IsInRole("Admin"))
+        {
+            
+        }
+        </div>
+    </div>
+</div>

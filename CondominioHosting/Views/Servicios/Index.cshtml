@@ -1,0 +1,194 @@
+﻿
+@{
+    ViewBag.Title = "Servicios";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<div id="header">
+    <h3>Servicios</h3>
+
+    <br>
+    <input type="text" name="" id="Buscar" placeholder="Ingrese el dato a buscar:">
+    <br>
+</div>
+
+<hr>
+
+<table>
+    <tr>
+        <th>Descripción</th>
+        <th>Monto</th>
+        <th>Más</th>
+    </tr>
+    <tbody id="Tabla">
+        @foreach (CondominioHosting.Models.BusquedaServicioProProcResult ST in ViewBag.listado)
+        {
+            <tr>
+                <td>@ST.ServicioDescripcion</td>
+                <td>@ST.ServicioGasto </td>
+                <td>
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+
+                        <div class="dropdown-menu">
+                            <a href="#ventana2" data-toggle="modal" class="dropdown-item mod" value="@ST.ServicioId">Modificar</a>
+                        </div>
+
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Agregar Servicio</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Servicios/Index">
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <label>Condominio:</label>
+                        <select class="form-control" name="CondominioId">
+                            @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Ct in ViewBag.condominios)
+                            {
+                                <option value="@Ct.CondominioId">@Ct.CondominioNombre</option>
+                            }
+                        </select>
+                    }
+                    @if (!User.IsInRole("Admin"))
+                    {
+                        <input type="hidden" name="CondominioId" value="@ViewBag.CondominioId" />
+                    }
+
+                    <label>Descripción:</label>
+                    <input type="text" name="ServicioDescripcion" class="form-control" maxlength="50" required>
+                    <label>Costo:</label>
+                    <input type="number" name="ServicioGasto" class="form-control" required min="0"> <br>
+                    <input type="submit" class="float-right btn btn-success" name="" value="Guardar">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana2">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Modificar Servicios</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <label>Descripción:</label>
+                    <input id="Descripcion" type="text" name="ServicioDescripcion" class="form-control" maxlength="50" required>
+                    <label>Costo:</label>
+                    <input id="Costo" type="number" name="ServicioGasto" class="form-control" required min="0"> <br>
+                    <input id="modificar" type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ventana3">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deshabilitar Servicio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Esta seguro que desea deshabilitar el servicio? </p>
+            </div>
+            <div class="modal-footer">
+                <button id="deshabilitar" type="button" class="btn btn-primary" data-dismiss="modal">Deshabilitar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="#ventana1" id="btn-agregar" class="btn btn-success" data-toggle="modal">Agregar</a>
+
+@section script{
+    <script>
+        var id;
+        $(document).ready(function () {
+
+            $("#Buscar").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#Tabla tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $(".des").on("click", function () {
+                id = $(this).attr("value");
+            });
+
+
+
+            $("#deshabilitar").on("click", function () {
+                var data;
+                $.ajax({ method: "POST", url: "/Servicios/Deshacer/" + id, data: data });
+
+
+            });
+
+            $(".mod").on("click", function () {
+                id = $(this).attr("value");
+                var data;
+                $.ajax({
+                    method: "GET", url: "/Servicios/ObtenerDatos/" + id, data: data,
+                    success: function (data) {
+                        debugger;
+                        document.getElementById('Descripcion').value = data.descripcion;
+                        document.getElementById('Costo').value = data.costo;
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+
+
+            });
+
+            $("#modificar").on("click", function () {
+                var descripcion = document.getElementById('Descripcion').value;
+                var costo = document.getElementById('Costo').value;
+                var data2 = { "descripcion": descripcion, "costo": costo };
+                $.ajax({ method: "POST", url: "/Servicios/Modificar/" + id, data: data2 });
+            });
+        });
+    </script>
+    }

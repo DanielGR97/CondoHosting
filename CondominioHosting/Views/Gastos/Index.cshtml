@@ -1,0 +1,266 @@
+﻿
+@{
+    ViewBag.Title = "Gastos";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<div id="header">
+    <h3>Buscar Gastos</h3>
+
+    <br>
+    <input type="text" name="" id="Buscar" placeholder="Ingrese el dato a buscar:">
+    <br>
+</div>
+
+<hr>
+
+<table id="FullTable">
+    <tr>
+        <th>Condominio</th>
+        <th>Descripción</th>
+        <th>Tipo</th>
+        <th>Fecha</th>
+        <th>Cantidad</th>
+        <th>Más</th>
+    </tr>
+    <tbody id="Tabla">
+    @foreach (CondominioHosting.Models.BusquedaGastoProcResult G in ViewBag.listado)
+    {
+        <tr>
+            <td>@G.CondominioNombre</td>
+            <td>@G.GastoDescripcion</td>
+            <td>@G.TipoGastoDescripcion</td>
+            <td>@G.GastoFecha.ToShortDateString()</td>
+            <td>US$ @G.GastoCantidad</td>
+            <td>
+                <div class="btn-group dropleft">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+
+                    <div class="dropdown-menu">
+                        <a href="#ventana1" data-toggle="modal" class="dropdown-item mod" value="@G.GastoId">Modificar</a>
+                        <a href="#ventana2" data-toggle="modal" class="dropdown-item des" value="@G.GastoId">Deshabilitar</a>
+                    </div>
+
+                </div>
+            </td>
+
+        </tr>
+    }
+    </tbody>
+
+</table>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Modificar Gastos</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <label>Descripción:</label>
+                    <input id="Descripcion" type="text" name="GastoDescripcion" class="form-control" maxlength="50" required>
+                    <label>Tipo de gasto:</label>
+                    <select id="Tipo" class="form-control" name="GastoTipoGastoId">
+                        <option disabled>Seleccione</option>
+                        @foreach (CondominioHosting.Models.BusquedaTipoGastoProcResult TipoGastos in ViewBag.tipoGasto)
+                        {
+                            <option value="@TipoGastos.TipoGastoId">@TipoGastos.TipoGastoDescripcion</option>
+                        }
+                    </select>
+                    <label>Fecha:</label>
+                    <input id="Fecha" type="date" name="GastoFecha" class="form-control" required>
+                    <label>Costo:</label>
+                    <input id="Costo" type="number" name="GastoCantidad" class="form-control" required> <br>
+                    <input id="modificar" type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ventana2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deshabilitar Gasto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea deshabilitar el gasto? </p>
+            </div>
+            <div class="modal-footer">
+                <button id="deshabilitar" type="button" class="btn btn-primary"  data-dismiss="modal">Deshabilitar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana3">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Registrar Gastos</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Gastos/Index">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <label>Condominio:</label>
+                        <select class="form-control" id="Condominio" name="CondominioId">
+                            @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Ct in ViewBag.condominio)
+                            {
+                                <option value="@Ct.CondominioId">@Ct.CondominioNombre</option>
+                            }
+                        </select>
+                    }
+                    @if (User.IsInRole("IngresosYGastos"))
+                    {
+                        <input type="hidden" name="CondominioId" value="@ViewBag.CondominioId" />
+                    }
+                    <label>Descripción:</label>
+                    <input type="text" name="GastoDescripcion" class="form-control" maxlength="50" required>
+                    <label>Tipo de gasto:</label>
+                    <select class="form-control" name="GastoTipoGastoId" id="TipoSelect">
+                        <option disabled>Seleccione</option>
+                        @foreach (CondominioHosting.Models.BusquedaTipoGastoProcResult TipoGastos in ViewBag.tipoGasto)
+                        {
+                            <option value="@TipoGastos.TipoGastoId">@TipoGastos.TipoGastoDescripcion</option>
+                        }
+                    </select>
+                    <label>Fecha:</label>
+                    <input type="date" name="GastoFecha" class="form-control" required>
+                    <label>Costo:</label>
+                    <input type="number" name="GastoCantidad" class="form-control" required> <br>
+                    <input type="hidden" name="GastoActivo" value="true">
+
+                    <input type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="#ventana3" id="btn-agregar" class="btn btn-success" data-toggle="modal">Agregar</a>
+
+
+@section script{
+    <script>
+        var id;
+        $(document).ready(function () {
+
+            $('#Condominio').on("change", function (e) {
+                $('#TipoSelect option').remove();
+                var IdCondominio = $('#Condominio').val();
+                if (IdCondominio > 0) {
+                    var datos = { "condominio": IdCondominio };
+                    $.ajax({
+                        type: "GET",
+                        url: "/Gastos/CambiarCombo/",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: datos,
+                        success: function (data) {
+                            debugger;
+                            if (data != null)
+
+                            $.each(data, function (key, value) {
+
+                                $("#TipoSelect").append("<option value=" + value.TipoGastoId + ">" + value.TipoGastoDescripcion + "</option>");
+                            });
+
+                        },
+                        error: function (data) {
+                            debugger;
+                            alert('error');
+                        }
+                    });
+                } else {
+
+                }
+
+            });
+
+
+            $("#Buscar").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#Tabla tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $(".des").on("click", function () {
+                id = $(this).attr("value");
+            });
+
+
+
+            $("#deshabilitar").on("click", function () {
+                var data;
+                $.ajax({ method: "POST", url: "/Gastos/Deshacer/" + id, data: data });
+                $("#FullTable").load(" #FullTable");
+
+            });
+
+            $(".mod").on("click", function () {
+                id = $(this).attr("value");
+                var data;
+                $.ajax({
+                    method: "GET", url: "/Gastos/ObtenerDatos/" + id, data: data,
+                    success: function (data) {
+                        debugger;
+                        document.getElementById('Descripcion').value = data.descripcion;
+                        document.getElementById('Tipo').value = data.tipo;
+                        document.getElementById('Fecha').value = data.fecha;
+                        document.getElementById('Costo').value = data.costo;
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+
+            });
+
+            $("#modificar").on("click", function () {
+                var descripcion = document.getElementById('Descripcion').value;
+                var tipo = document.getElementById('Tipo').value;
+                var fecha = document.getElementById('Fecha').value;
+                var costo = document.getElementById('Costo').value;
+                var data2 = { "descripcion": descripcion, "tipo": tipo, "fecha": fecha, "costo": costo };
+                $.ajax({ method: "POST", url: "/Gastos/Modificar/" + id, data: data2 });
+            });
+
+        });
+    </script>
+}

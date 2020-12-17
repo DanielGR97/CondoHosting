@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Registro Inguilinos";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<form id="todo" method="post" action="/Inquilinos/RegistrarInquilino">
+    <h3>Registro de Inquilinos</h3>
+    <div class="form-group has-success" id="formu">
+        @if (User.IsInRole("Admin"))
+        {
+            <label>Condominio:</label>
+                        <select class="form-control" name="PersonaCondominioId">
+                            @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Ct in ViewBag.condominios)
+                            {
+                                <option value="@Ct.CondominioId">@Ct.CondominioNombre</option>
+                            }
+                        </select>
+        }
+        @if (User.IsInRole("Inquilino"))
+        {
+            <input type="hidden" name="PersonaCondominioId" value="@ViewBag.CondominioId" />
+        }
+        <label class="form-control-label">Nombre</label>
+        <input type="text" class="form-control" requiered name="PersonaNombre" onkeypress="lettersonly()" required pattern="[ a-zA-Z_-]{2,40}"  title="Solo las letras estan permitidas"><br>
+        <label>Apellido</label>
+        <input type="text" class="form-control" name="PersonaApellido" required pattern="[ a-zA-Z_-]{2,40}"  title="Solo las letras estan permitidas"><br>
+        <label>Documento</label>
+        <select  id="Documento" class="custom-select">
+            <Option value="1" selected>Cédula</Option>
+            <Option value="2">Pasaporte</Option>
+        </select><br><br>
+        <input type="text" class="form-control" id="cedula" name="PersonaDocumento" required><br>
+        <label>Teléfono</label>
+        <input type="text" class="form-control" id="Telefono" name="PersonaTelefono" required><br>
+        <label>Correo</label>
+        <input type="email" class="form-control" name="PersonaCorreo" required><br>
+        <label>Fecha de nacimiento:</label>
+        <input type="date" class="form-control" name="PersonaFechaNacimiento" required> <br />
+        <input type="hidden" name="PersonaTipoId" value="1" />
+        <label>Nacionalidad</label>
+        <select class="custom-select" name="PersonaNacionalidad">
+        @foreach (CondominioHosting.Models.NacionalidadTable nac in ViewBag.nac)
+        {
+            <option value="@nac.NacionalidadId">@nac.NacionalidadNombre</option>
+        }
+        </select><br><br>
+            <label>Sexo</label>
+            <select class="custom-select" name="PersonaSexoId">
+                @foreach (CondominioHosting.Models.SexoTable sex in ViewBag.sex)
+                {
+                    <option value="@sex.SexoId">@sex.SexoDescripcion</option>
+                }
+            </select><br>
+
+        <label>Estado civil:</label>
+        <select class="custom-select" name="PersonaCivilId">
+            @foreach (CondominioHosting.Models.EstadoCivilTable civ in ViewBag.civil)
+            {
+                <option value="@civ.IdEstadoCivil">@civ.EstadoCivilDescripcion</option>
+            }
+        </select><br>
+
+        <label>Referido:</label>
+        <select class="custom-select" name="PersonaReferidoId">
+            @foreach (CondominioHosting.Models.ComboBoxReferidosProcResult referido in ViewBag.referido)
+            {
+                <option value="@referido.PersonaId">@referido.PersonaNombre @referido.PersonaApellido</option>
+            }
+        </select><br>
+
+        <input type="hidden" name="PersonaActivo" value="true" />
+        </div>
+        <input type="hidden" value="true" name="PersonaActivo" />
+        <label>Dirección</label>
+        <textarea type="text" class="form-control" name="PersonaDireccion" required></textarea><br>
+        <input type="submit" class="float-right btn btn-success"  onclick="allLetter(document.form.PersonaNombre)" value="Guardar">
+    </div>
+
+    <div class="form-group has-success" id="botones">
+        <div id="botones2">
+            @*<a href="@Url.Action("RegistroPropiedadServicios", "Inquilinos")" class="btn btn-success">Registrar</a>*@
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+
+
+        </div>
+      </div>
+</form>
+
+
+@section script{
+
+    <script>
+
+    $(function ($) {
+
+        $("#Telefono").mask("(999)-999-9999");
+        $("#cedula").mask("999-9999999-9");
+
+        $("#Documento").on("change", function () {
+            if ($("#Documento").val() == "1") {
+                $("#cedula").mask("999-9999999-9");
+            } else {
+                $("#cedula").mask("*********");
+            }
+        });
+
+
+    });
+
+   
+
+
+    </script>
+}

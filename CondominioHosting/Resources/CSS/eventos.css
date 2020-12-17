@@ -1,0 +1,23 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#todo{
+    position: absolute;
+    left: 190px;
+    top: 20px;
+}
+#area{
+    position: relative;
+    left: 20px;
+    top: 2px;
+}
+#formu{
+    margin-top: 20px;
+}
+#botones{
+    position: relative;
+    margin-left: 150px;
+    bottom: 76px;
+    
+}

@@ -1,0 +1,251 @@
+﻿@{
+    ViewBag.title = "CondoHosting";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="shortcut icon" href="../../Resources/IMG/favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>CondoHosting</title>
+    <link href="~/Resources/CSS/bootstrap.css" rel="stylesheet" />
+    <link href="~/Resources/CSS/Estilo.css" rel="stylesheet" />
+    <script src="~/Resources/JS/jquery-3.2.1.min.js"></script>
+    <script src="~/Resources/JS/bootstrap.bundle.js"></script>
+    <script src="~/Resources/JS/jquery.maskedinput.js"></script>
+    <script src="~/Resources/JS/moment.min.js"></script>
+
+    <script>
+
+
+        $(document).ready(function () {
+  
+            document.getElementById("CrearCuenta").onsubmit = function () {
+                
+                var x = document.getElementById("FechaNacimiento").valueAsDate;  
+		        var nacimiento = moment(x);
+		        var hoy = moment();
+		        var anios = hoy.diff(nacimiento, "years");
+		        if (clave1.value == clave2.value) {
+
+		            if (anios < 18) {
+		                alert("Usted no es mayor de edad");
+		                return false;
+		            } else {
+
+		                return true;
+		            }
+
+		        } else {
+		            document.getElementById('clave1').value = "";
+		            document.getElementById('clave2').value = "";
+		            document.getElementById('clave1').focus();
+		            document.getElementById('clave1').style.borderColor = "red";
+		            document.getElementById('clave2').style.borderColor = "red";
+		            document.getElementById('clave1').placeholder = "";
+		            document.getElementById('clave2').placeholder = "";
+		            $('#clave2').addClass('.has-error');
+		           return false;
+                }
+                
+
+		    };
+
+			$(function ($) {
+
+				$("#telefono").mask("(999)-999-9999");
+				$("#cedula").mask("999-9999999-9");
+                //$("#clave1").pattern()
+
+
+			});
+
+			$("#LoginButton").on("click", function (e) {
+				//alert("hola");
+				//To prevent form submit after ajax call
+				e.preventDefault();
+				//Set data to be sent
+				var data = { "PersonaCorreo": $("#correo").val(), "PersonaContra": $("#pass").val() }
+				$.ajax({
+					url: "/Account/CheckLogin/",
+					type: "POST",
+
+					data: JSON.stringify(data),
+					dataType: "json",
+					contentType: "application/json",
+					success: function (status) {
+						if (status != "InvalidData") {
+							$("#span1").css("display", "block");
+							$("#span1").css("color", "green");
+							$("#span1").html("Valid Username and password");
+							$("#LoginButton").attr("disabled", true);
+
+							var url = $("#RedirectTo").val();
+							location.href = url;
+
+						}
+						else {
+
+							$("#span1").css("display", "block");
+							$("#span1").css("color", "red");
+							$("#span1").html("Usuario y/o contraseña invalida");
+							$("#correo").val("");
+							$("#pass").val("");
+							$("#correo").focus();
+						}
+					},
+					error: function () {
+					}
+				})
+			});
+
+			$("#Guardar").on("click", function (e) {
+			    var x = document.getElementById("FechaNacimiento").value();
+			    var nacimiento = moment(document.getElementById("FechaNacimiento").val());
+			    var hoy = moment();
+			    var anios = hoy.diff(nacimiento, "years");
+			    alert(anios);
+
+			});
+			
+		});
+
+    </script>
+</head>
+<body>
+    <header>
+        <!-- <img src="Logo.gif"> -->
+        <nav class="navbar navbar-inverse bg-inverse">
+            <!-- Navbar content -->
+            <ul>
+                <li><a href="#CondominioHosting">Home</a></li>
+                <li><a href="#AcercaDeNosotros">Acerca de nosotros</a></li>
+                <li><a href="#Contactanos">Contactanos</a></li>
+                <li><a href="#Registro" data-toggle="modal">Registro</a></li>
+            </ul>
+
+
+        </nav>
+
+
+    </header>
+    <aside>
+        <br />
+        <h3><i><b>Login</b></i></h3>
+        <form>
+            <label>Correo:</label>
+            <input type="email" placeholder="Ejemplo@hotmail.com" class="form-control float-right" name="correo" id="correo" required>
+            <br>
+            <label>Contraseña:</label>
+            <input type="password" placeholder="************" class="form-group form-control float-right has-error has-feedback" name="pass" id="pass" required>
+            <br>
+            <br>
+            <input type="button" class="btn btn-success float-right" id="LoginButton" name="btn" value="Ingresar" width="100">
+            <span id="span1"></span>
+        </form>
+    </aside>
+
+    <div id="cuerpo">
+        <section id="CondominioHosting">
+            <h3 id="arriba"><i>"CondominioHosting"</i></h3>
+            <br>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </section>
+
+        <section id="AcercaDeNosotros">
+            <h3><i>Acerca de nosotros</i></h3>
+            <br>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </section>
+
+        <section id="Contactanos">
+            <h3><i>Contactanos</i></h3>
+            <br>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+            </p>
+        </section>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="Registro">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Registro</h4>
+                    <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/Home/Index" onsubmit="return isValidForm()" id="CrearCuenta">
+                        <label>Nombre</label>
+                        <input type="text" name="PersonaNombre" id="PersonaNombre" placeholder="Ej: Juan" class="form-control" required pattern="[ a-zA-Z_-]{2,40}"  title="Solo las letras estan permitidas">
+                        <label>Apellido</label>
+                        <input type="text" name="PersonaApellido" id="PersonaApellido" placeholder="Ej: Gomez" class="form-control" required pattern="[ a-zA-Z_-]{2,40}" title="Solo las letras estan permitidas">
+                        <label>Correo</label>
+                        <input type="email" name="PersonaCorreo" placeholder="Ejemplo@hotmail.com" class="form-control" required>
+                        <label>Teléfono</label>
+                        <input type="tel" id="telefono" class="form-control" name="PersonaTelefono" placeholder="(809)-555-5555" required>
+                        <input type="hidden" name="PersonaTipoId" value="4" />
+                        <label>Cédula</label>
+                        <input type="text" id="cedula" name="PersonaDocumento" class="form-control" placeholder="999-9999999-9" required>
+                        <label>Fecha de Nacimiento</label>
+                        <input type="date" id="FechaNacimiento" name="PersonaFechaNacimiento" required class="form-control" />
+                        <label>Sexo</label>
+                        <select class="form-control" name="PersonaSexoId">
+                            @foreach (CondominioHosting.Models.SexoTable sexo in ViewBag.sexo)
+                            {
+                                <option value="@sexo.SexoId">@sexo.SexoDescripcion</option>
+                            }
+                        </select>
+                        <br>
+                        <label>Nacionalidad</label><br />
+                        <select class="form-control" name="PersonaNacionalidad">
+                            @foreach (CondominioHosting.Models.NacionalidadTable nac in ViewBag.nac)
+                            {
+                                <option value="@nac.NacionalidadId">@nac.NacionalidadNombre</option>
+                            }
+                        </select><br />
+                        <label>Contraseña</label>
+                        <input type="password" name="PersonaContra" id="clave1" placeholder="***********" class="form-control" required>
+                        <label>Confirmar Contraseña</label>
+                        <input type="password" name="" placeholder="***********" id="clave2" class="form-control" required><br />
+                        <label>Dirección</label>
+                        <textarea name="PersonaDireccion" class="form-control" style="resize:none" required></textarea>
+                        <input type="hidden" name="PersonaActivo" value="1" />
+                        <input type="hidden" name="PersonaRolId" value="2" />
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <input type="submit" class="float-right btn btn-success" name="" id="Guardar" value="Guardar">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+@Html.Hidden("RedirectTo", Url.Action("Menu", "Home"));
+
+</html>

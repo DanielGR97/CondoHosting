@@ -1,0 +1,216 @@
+﻿
+@{
+    ViewBag.Title = "Inquilinos";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<div id="header">
+    <h3>Inqulinos</h3>
+    <br>
+    <input type="text" name="" id="Buscar" placeholder="Ingrese el dato a buscar:">
+</div>
+
+<table id="FullTable">
+  
+    <tr>
+        <th>Condominio</th>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+        <th>Documento</th>
+        <th>Correo</th>
+        <th>Dirección</th>
+        <th>Más</th>
+
+
+
+    </tr>
+    <tbody id="Tabla">
+        @foreach (CondominioHosting.Models.BusquedaInquilinoProcResult per in ViewBag.listado)
+        {
+            <tr>
+                <td>@per.CondominioNombre</td>
+                <td>@per.PersonaNombre @per.PersonaApellido</td>
+                <td>@per.PersonaTelefono</td>
+                <td>@per.PersonaDocumento</td>
+                <td>@per.PersonaCorreo</td>
+                <td>@per.PersonaDireccion</td>
+
+                <td>
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+
+                        <div class="dropdown-menu">
+                            <a href="#ventana1" data-toggle="modal" class="dropdown-item mod" value="@per.PersonaId">Modificar</a>
+                            <a href="#ventana2" data-toggle="modal" class="dropdown-item des" value="@per.PersonaId">Deshabilitar</a>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Modificar Inquilino</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label>Nombre:</label>
+                    <input type="text" id="Nombre" name="" class="form-control" required pattern="[ a-zA-Z_-]{2,40}"  title="Solo las letras estan permitidas">
+                    <label>Apellido:</label>
+                    <input type="text" id="Apellido" name="" class="form-control" required pattern="[ a-zA-Z_-]{2,40}"  title="Solo las letras estan permitidas">
+                    <label>Fecha de nacimiento:</label>
+                    <input type="date" id="Nacimiento" class="form-control" name="" required> <br />
+                    <label>Documento:</label> <br />
+                    <select id="TipoDocumento" class="custom-select">
+                        <option value="0" selected disabled>Seleccione</option>
+                        <Option value="1">Cédula</Option>
+                        <Option value="2">Pasaporte</Option>
+                    </select> <br />
+                    <input type="text" id="Documento" name="" class="form-control Cedula" required>
+                    <label>Sexo:</label>
+                    <select class="form-control" id="Sexo" name="">
+                        @foreach (CondominioHosting.Models.SexoTable sexo in ViewBag.sexo)
+                        {
+                            <option value="@sexo.SexoId">@sexo.SexoDescripcion</option>
+                        }
+                    </select>
+                    <label>Teléfono:</label>
+                    <input type="text" id="Telefono" name="" class="form-control Telefono" required>
+                    <label>Nacionalidad:</label>
+                    <select class="form-control" id="Nacionalidad" name="">
+                        @foreach (CondominioHosting.Models.NacionalidadTable nac in ViewBag.nacion)
+                        {
+                            <option value="@nac.NacionalidadId">@nac.NacionalidadNombre</option>
+                        }
+                    </select>
+                    <label>Dirección:</label><br>
+                    <textarea class="form-control" id="Direccion" required></textarea>
+                    <input type="submit" id="modificar" class="float-right btn btn-success" name="" value="Guardar">
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="ventana2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deshabilitar Inquilino</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Esta seguro que desea deshabilitar este inquilino? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancelar</button>
+                <button id="deshabilitar" type="button" class="btn btn-primary" data-dismiss="modal">Deshabilitar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="@Url.Action("RegistrarInquilino", "Inquilinos")" id="btn-agregar" class="btn btn-success">Agregar Inquilino</a>
+
+
+@section script{
+    <script>
+        var id;
+        $(document).ready(function () {
+
+
+            $(".Telefono").mask("(999)-999-9999");
+
+            $("#TipoDocumento").on("change", function () {
+                if ($("#TipoDocumento").val() == "1") {
+                    $(".Cedula").mask("999-9999999-9");
+                } else if ($("#TipoDocumento").val() == "2") {
+                    $(".Cedula").mask("*********");
+                } else {
+
+                }
+            });
+
+            $("#Buscar").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#Tabla tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $(".des").on("click", function () {
+                id = $(this).attr("value");
+            });
+
+
+
+            $("#deshabilitar").on("click", function () {
+                var data;
+                $.ajax({ method: "POST", url: "/Inquilinos/Deshacer/" + id, data: data });
+                $("#FullTable").load(" #FullTable");
+            });
+
+            $(".mod").on("click", function () {
+                id = $(this).attr("value");
+                var data;
+                $.ajax({
+                    method: "GET", url: "/Inquilinos/ObtenerDatos/" + id, data: data,
+                    success: function (data) {
+                        debugger;
+                        document.getElementById('Nombre').value = data.nombre;
+                        document.getElementById('Apellido').value = data.apellido;
+                        document.getElementById('Nacimiento').value = data.nacimiento;
+                        document.getElementById('Sexo').value = data.sexo;
+                        document.getElementById('Documento').value = data.documento;
+                        document.getElementById('Telefono').value = data.telefono;
+                        document.getElementById('Nacionalidad').value = data.nacionalidad;
+                        document.getElementById('Direccion').value = data.direccion;
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+
+            });
+
+            $("#modificar").on("click", function () {
+                var nombre = document.getElementById('Nombre').value;
+                var apellido = document.getElementById('Apellido').value;
+                var nacimiento = document.getElementById('Nacimiento').value
+                var sexo = document.getElementById('Sexo').value;
+                var documento = document.getElementById('Documento').value;
+                var telefono = document.getElementById('Telefono').value;
+                var nacionalidad = document.getElementById('Nacionalidad').value;
+                var direccion = document.getElementById('Direccion').value;
+                var data2 = { "nombre": nombre, "apellido": apellido, "nacimiento": nacimiento, "sexo": sexo, "documento": documento, "telefono": telefono, "nacionalidad": nacionalidad, "direccion": direccion };
+                $.ajax({ method: "POST", url: "/Inquilinos/Modificar/" + id, data: data2 });
+            });
+
+        });
+    </script>
+}

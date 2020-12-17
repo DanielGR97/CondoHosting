@@ -1,0 +1,336 @@
+﻿
+
+@{
+    ViewBag.Title = "Presupuesto";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<h3>Presupuesto</h3>
+<hr>
+<form>
+    <input type="text" class="form-control" name="" id="Buscar"><br />
+</form>
+<table>
+    <tr>
+        <th>Condominio</th>
+        <th>Fecha</th>
+        <th>Mas</th>
+    </tr>
+    <tbody id="Tabla">
+        @foreach (CondominioHosting.Models.BusquedaPresupuestoProcResult Pt in ViewBag.listado)
+        {
+
+            <tr>
+                <td>@Pt.CondominioNombre.ToString()</td>
+                <td>@Pt.PresupuestoFecha.ToString("MM/yyyy")</td>
+                <td>
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+
+                        <div class="dropdown-menu">
+                            <a href="#ventana3" data-toggle="modal" class="dropdown-item mod" value="@Pt.PresupuestoId">Modificar</a>
+                        </div>
+
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ventana1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar Presupuesto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="/Presupuestos/Index">
+                <div class="modal-body">
+                    <label>Condominio</label>
+                    @if (User.IsInRole("Admin")) { 
+                    <select class="form-control" name="PresupuestoCondominioId">
+                        @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Pt in ViewBag.condo)
+                        {
+                            <option value="@Pt.CondominioId">@Pt.CondominioNombre</option>
+                        }
+                    </select>
+                    }
+                    @if (User.IsInRole("Presupuestos"))
+                    {
+                        <input type="hidden" name="PresupuestoCondominioId" value="@ViewBag.CondominioId" />
+                    }
+                    <br />
+                    <label>Mes</label>
+                    <input type="month" name="PresupuestoFecha" class="form-control">
+                    <input type="hidden" name="PresupuestoActivo" value="True" />
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="float-right btn btn-success" name="" value="Guardar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ventana3">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modificar Presupuesto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="/Presupuesto/IndexD">
+                <div class="modal-body">
+                    <input type="hidden" name="PresupuestoId" value="" />
+                    <label>Gasto</label>
+                    <select class="form-control" id="Tipo" name="DetallePresupuestoTipoGastoId">
+                        @foreach (CondominioHosting.Models.TipoGastoTable TipoGastos in ViewBag.TipoGastos)
+                        {
+                            <option value="@TipoGastos.TipoGastoId">@TipoGastos.TipoGastoDescripcion</option>
+                        }
+                    </select>
+                    <label>Monto</label>
+                    <input type="number" id="Costo" name="DetallePresupuestoCosto" min="0" class="form-control" required>
+
+                    <a id="addDetail" class="btn btn-secondary float-right" style="margin-top:5px; margin-bottom:5px;" href="#">Agregar al detalle</a>
+
+                    <table class="ui table" id="Detalle">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">
+                                <th>Gasto</th>
+                                <th>Monto</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                    </table>
+                    <br>
+                    <input type="hidden" name="DetallePresupuestoActivo" value="true" />
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <input id="" type="#" class="float-right btn btn-success" name="" value="Guardar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<a href="#ventana1" id="btn-agregar" class="btn btn-success float-right" data-toggle="modal">Agregar</a>
+
+
+
+@section script{
+    <script>
+
+
+
+        var id;
+        $(document).ready(function () {
+
+            $("#Buscar").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#Tabla tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $(".des").on("click", function () {
+                id = $(this).attr("value");
+            });
+
+
+
+            $("#deshabilitar").on("click", function () {
+                var data;
+                $.ajax({ method: "POST", url: "/Presupuestos/Deshacer/" + id, data: data });
+
+
+            });
+
+            var idMod = 0;
+            $(".mod").on("click", function () {
+
+                lineaMod = 0;
+                $("#Detalle > tr").remove();
+                document.getElementById('Costo').value = "";
+                id2 = $(this).attr("value");
+                idMod =  $(this).attr("value");
+                var data2 = { "Id" : id2};
+
+                $.ajax({
+                    method: "GET", url: "/Presupuestos/ObtenerDatos/" + id2, data: data2,
+                    success: function (data) {
+                        debugger;
+                        $.each(data, function (key, value) {
+                                        
+                            template =
+                                '<tr><td style="display:none;">' + "<input type='hidden' name='DetallePresupuestoId[" + lineaMod + "][PresupuestoId]' value=" + "'" + value.DetallePresupuestoId + "' />" +
+                                "</td><td>" + value.TipoGastoDescripcion + "</td><td> US$" + value.DetallePresupuestoCosto + "</td> <td> <a class='borrarDetalle btn btn-danger float-right' href='#'>Borrar</a> </td> </tr>";
+                            lineaMod = lineaMod + 1;
+                            $("#Detalle").append(template);
+
+                        });
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+                });
+
+            });
+
+            //$("#modificar").on("click", function () {
+            //    var tipoGasto = document.getElementById('Tipo').value;
+            //    var fecha = document.getElementById('Fecha').value;
+            //    var costo = document.getElementById('Costo').value;
+            //    var data2 = {"tipoGasto": tipoGasto, "fecha": fecha, "costo": costo };
+            //    $.ajax({ method: "POST", url: "/Presupuestos/Modificar/" + id, data: data2 });
+            //});
+
+
+            linea = 0;
+            lineaMod = 0;
+            $("#addDetail").on("click", function (e) {
+                var TipoId = $('#Tipo option:selected').val();
+                var TipoDescripcion = $('#Tipo option:selected').text();
+                var Monto = $('#Costo').val();
+
+                
+
+                var data = { "TipoId" : TipoId, "Monto" : Monto };
+                $.ajax({
+                    method: "POST", url: "/Presupuestos/AgregarDetalle/" + idMod, data: data,
+                    success: function (data) {
+                        if (data.success) {
+                            template =
+                                '<tr><td style="display:none;">' + "<input type='hidden' name='DetallePresupuestoId[" + linea + "][PresupuestoId]' value=" + "'" + data.DetallePresupuestoId + "' />" +
+                                "</td><td>" + TipoDescripcion + "</td><td> US$" + Monto + "</td> <td> <a class='borrarDetalle btn btn-danger float-right' href='#'>Borrar</a> </td> </tr>";
+                            linea = linea + 1;
+                            $("#Detalle").append(template);
+                        } else {
+                            alert("Este tipo de gasto ya está agregado, por favor seleccione otro.");
+                        }
+
+                    },
+                    error: function (data) {
+                        alert("error");
+                    }
+                });
+
+                //var x = document.getElementById("Tipo");
+                //x.remove(x.selectedIndex);
+
+            });
+
+            $("#Detalle").on("click", ".borrarDetalle", function (e) {
+
+
+                var id = $("input", $(this).parent().parent()).val();
+                $(this).parent().parent().attr("id", "newId");
+                var data;
+                $.ajax({
+                    method: "GET", url: "/Presupuestos/EliminarDetalle/" + id, data: data,
+                    success: function (data) {
+                        $("#newId").remove();
+
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+
+            });
+
+
+
+
+
+
+
+            $("#eliminateDetail").on("click", function (e) {
+
+                $("#eliminateDetail").hide();
+                linea = 0;
+                $("#Detalle > tr").remove();
+
+                $('#Tipo option').remove();
+                var datos;
+                $.ajax({
+                    type: "GET",
+                    url: "/Presupuestos/CambiarCombo/",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: datos,
+                    success: function (data) {
+                        debugger;
+                        $('#SelectInquilino').append("<option value='0'>Seleccione</option>");
+                        $.each(data, function (key, value) {
+
+                            $("#Tipo").append("<option value=" + value.TipoId + ">" + value.TipoDescripcion + "</option>");
+                        });
+
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+                });
+            });
+
+                $("#ModDetail").on("click", function (e) {
+                    var AccesoId = $('#SeleccionarRolMod option:selected').val();
+                    var AccesNombre = $('#SeleccionarRolMod option:selected').text();
+
+                    var data = { "IdAcceso" : AccesoId };
+                    $.ajax({
+                        method: "POST", url: "/Rol/AgregarDetalle/" + idMod, data: data,
+                        success: function (data) {
+                            if (data.success) {
+                                template =
+                                   '<tr id="" class="detalleRow" value="  "><td style="display:none;">' + "<input type='hidden' name='DetalleRolTables[" + lineaMod + "][AccesoId]' value=" + "'" + data.DetalleRolId + "' />" +
+                                   "</td><td class='nombreAcceso'>" + AccesNombre +
+                                   "</td> <td> <a class='borrarDetalle btn btn-danger float-right' href='#'>Borrar</a> </td> </tr>";
+                                lineaMod = lineaMod + 1;
+                                $("#ModDetalle").append(template);
+                            } else {
+                                alert("Este rol ya está agregado, por favor seleccione otro.");
+                            }
+
+                        },
+                        error: function (data) {
+                            alert("error");
+                        }
+                    });
+
+                });
+
+                
+        });
+    </script>
+}

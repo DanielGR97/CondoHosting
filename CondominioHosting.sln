@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CondominioHosting", "CondominioHosting\CondominioHosting.csproj", "{B17C7631-9F00-4190-84CF-E8D1DEE4212E}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CondominioHostingdb", "CondominioHostingdb\CondominioHostingdb.sqlproj", "{BF997D21-2AB2-4B1A-B072-E5437838ACEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B17C7631-9F00-4190-84CF-E8D1DEE4212E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B17C7631-9F00-4190-84CF-E8D1DEE4212E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B17C7631-9F00-4190-84CF-E8D1DEE4212E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B17C7631-9F00-4190-84CF-E8D1DEE4212E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF997D21-2AB2-4B1A-B072-E5437838ACEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF997D21-2AB2-4B1A-B072-E5437838ACEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF997D21-2AB2-4B1A-B072-E5437838ACEE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BF997D21-2AB2-4B1A-B072-E5437838ACEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF997D21-2AB2-4B1A-B072-E5437838ACEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF997D21-2AB2-4B1A-B072-E5437838ACEE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://hostingmanagement.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = CondominioHosting\\CondominioHosting.csproj
+		SccProjectName1 = CondominioHosting
+		SccLocalPath1 = CondominioHosting
+		SccProjectUniqueName2 = CondominioHostingdb\\CondominioHostingdb.sqlproj
+		SccProjectName2 = CondominioHostingdb
+		SccLocalPath2 = CondominioHostingdb
+	EndGlobalSection
+EndGlobal

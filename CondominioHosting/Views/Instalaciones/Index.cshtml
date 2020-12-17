@@ -1,0 +1,294 @@
+﻿
+@{
+    ViewBag.Title = "Instalaciones";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<div id="header">
+    <h3>Instalaciones</h3>
+    <br>
+    <div id="header">
+
+
+        <br>
+        <input type="text" name="" id="Buscar" placeholder="Ingrese el dato a buscar:">
+        <br>
+    </div>
+
+    <hr>
+
+    <table id="FullTable">
+        <tr>
+            <th>Descripción</th>
+            <th>Condominio</th>
+            <th>Tipo de instalación</th>
+            <th>Hora de uso</th>
+            <th>Hora Final</th>
+            <th>Más</th>
+        </tr>
+        <tbody id="Tabla">
+        @foreach (CondominioHosting.Models.BusquedaInstalacionProcResult insta in ViewBag.listado) {
+        <tr>
+            <td>@insta.InstalacionDescripcion</td>
+            <td>@insta.CondominioNombre</td>
+            <td>@insta.TipoInstalacionDescripcion</td>
+            <td>@insta.InstalacionHorarioInicial</td>
+            <td>@insta.InstalacionHorarioFinal</td>
+            <td>
+                <div class="btn-group dropleft">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+
+                    <div class="dropdown-menu">
+                        @*<a href="#ventana4" data-toggle="modal" class="dropdown-item">Mantenimiento</a>*@
+                        <a href="#ventana1" data-toggle="modal" class="dropdown-item mod" value="@insta.InstalacionId">Modificar</a>
+                        <a href="#ventana2" data-toggle="modal" class="dropdown-item des" value="@insta.InstalacionId">Deshabilitar</a>
+
+                    </div>
+
+                </div>
+            </td>
+
+        </tr>
+        }
+</tbody>
+    </table>
+
+
+
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Modificar instalaciones</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <label>Tipo de Instalación:</label>
+                    <select id="Tipo" class="form-control" name="InstalacionTipoId">
+                        @foreach (CondominioHosting.Models.TipoInstalacionTable insta in ViewBag.tipint)
+                        {
+                            <option value="@insta.TipoInstalacionId">@insta.TipoInstalacionDescripcion</option>
+                        }
+                    </select>
+                    <label>Descripción:</label>
+                    <textarea id="Descripcion" class="form-control" name="InstalacionDescripcion" required></textarea>
+                    <label>Hora de uso inicial:</label>
+                    <input id="HoraI" type="time" name="InstalacionHorarioInicial" class="form-control" required>
+                    <label>Hora de uso final:</label>
+                    <input id="HoraF" type="time" name="InstalacionHorarioFinal" class="form-control" required><br>
+                    <input type="hidden" name="InstalacionActivo" value="true">
+                    <input id="modificar" type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ventana2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deshabilitar instalación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea deshabilitar la instalación? </p>
+            </div>
+            <div class="modal-footer">
+                <button id="deshabilitar" type="button" class="btn btn-primary" data-dismiss="modal">Deshabilitar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana3">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Registrar instalación</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Instalaciones/Index">
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <label>Condominio:</label>
+                        <select class="form-control" name="InstalacionCondominioId">
+                            @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Ct in ViewBag.condominios)
+                            {
+                                <option value="@Ct.CondominioId">@Ct.CondominioNombre</option>
+                            }
+                        </select>
+                    }
+                    @if (User.IsInRole("Instalaciones"))
+                    {
+                        <input type="hidden" name="InstalacionCondominioId" value="@ViewBag.CondominioId" />
+                    }
+                    <label>Tipo de Instalación:</label>
+                    <select class="form-control" name="InstalacionTipoId">
+                        @foreach (CondominioHosting.Models.TipoInstalacionTable insta in ViewBag.tipint)
+                        {
+                            <option value="@insta.TipoInstalacionId">@insta.TipoInstalacionDescripcion</option>
+                        }
+                    </select>
+                    <label>Descripción:</label>
+                    <textarea class="form-control" name="InstalacionDescripcion" required></textarea>
+                    <label>Hora de uso inicial:</label>
+                    <input type="time" name="InstalacionHorarioInicial" class="form-control" required>
+                    <label>Hora de uso final:</label>
+                    <input type="time" name="InstalacionHorarioFinal" class="form-control" required><br>
+                    <input type="hidden" name="InstalacionActivo" value="true">
+                    <input type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana4">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Asignar Mantenimiento</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group has-success" id="formu">
+                        <label for="Nombres">Empleado</label>
+                        <select class="form-control" id="Nombres" >
+                            <option>Juan Rodriguez</option>
+                            <option>Pedro Mejia </option>
+                            <option>Lucas Carpio</option>
+                            <option>Mario Loco</option>
+                            <option>Estefania Cabrera</option>
+                        </select><br>
+                        <label for="insta">Instalación</label>
+                        <select class="form-control" id="insta">
+                            <option>Piscina</option>
+                            <option>Jardin</option>
+                            <option>Parqueo</option>
+                            <option>Cancha de basketball</option>
+                            <option>Gacebo</option>
+                        </select><br>
+
+
+
+                        <label for="propiedades">Propiedad</label>
+                        <select class="custom-select" id="propiedades">
+                            <option>1A</option>
+                            <option>3C</option>
+                            <option>2B</option>
+                            <option>4B</option>
+                            <option>1C</option>
+                        </select>
+
+                        <br>
+                        <br>
+                        <label for="descripcion">Descripción</label>
+                        <textarea class="form-control" name="descripcion" requiered>  </textarea><br>
+                        <label for="fecha">Fecha</label>
+                        <input type="date" class="form-control" name="fecha" placeholder="00/00/0000"><br>
+                        <a href="#" class="btn btn-success float-right" data-toggle="modal">Guardar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<a href="#ventana3" id="btn-agregar" class="btn btn-success" data-toggle="modal">Agregar</a>
+
+@section script{
+    <script>
+        var id;
+        $(document).ready(function () {
+
+            $("#Buscar").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#Tabla tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $(".des").on("click", function () {
+                id = $(this).attr("value");
+            });
+
+
+
+            $("#deshabilitar").on("click", function () {
+                var data;
+                $.ajax({ method: "POST", url: "/Instalaciones/Deshacer/" + id, data: data });
+                $("#FullTable").load(" #FullTable");
+
+            });
+
+
+            $(".mod").on("click", function () {
+                id = $(this).attr("value");
+                var data;
+                $.ajax({
+                    method: "GET", url: "/Instalaciones/ObtenerDatos/" + id, data: data,
+                    success: function (data) {
+                        debugger;
+                        document.getElementById('Tipo').value = data.tipo;
+                        document.getElementById('Descripcion').value = data.descripcion;
+                        document.getElementById('HoraI').value = data.horaI;
+                        document.getElementById('HoraF').value = data.horaF;
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+
+            });
+
+            $("#modificar").on("click", function () {
+                var tipo = document.getElementById('Tipo').value;
+                var descripcion = document.getElementById('Descripcion').value;
+                var horaI = document.getElementById('HoraI').value;
+                var horaF = document.getElementById('HoraF').value;
+                var data2 = { "tipo": tipo, "descripcion": descripcion, "horaI": horaI, "horaF": horaF };
+                $.ajax({ method: "POST", url: "/Instalaciones/Modificar/" + id, data: data2 });
+            });
+
+        });
+    </script>
+}

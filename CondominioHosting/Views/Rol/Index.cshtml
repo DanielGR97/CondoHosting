@@ -1,0 +1,366 @@
+﻿
+@{
+    ViewBag.Title = "Ver roles";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<div id="header">
+    <h3>Buscar Roles</h3>
+
+    <br>
+    <input type="text" id="Buscar" name="" placeholder="Ingrese el dato a buscar:">
+    <br>
+</div>
+
+<hr>
+
+<table>
+    <tr>
+        <th>Condominio</th>
+        <th>Descripción</th>
+        <th>Más</th>
+    </tr>
+    <tbody id="Tabla">
+        @foreach (CondominioHosting.Models.BusquedaRolProcResult rt in ViewBag.rol)
+        {
+            <tr>
+                <td>@rt.CondominioNombre</td>
+                <td>@rt.Descripcion </td>
+                <td>
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+
+                        <div class="dropdown-menu">
+                            <a href="#ventana1" data-toggle="modal" class="dropdown-item mod" value="@rt.RolId">Modificar</a>
+                        </div>
+
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Modificar Roles</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <label>Descripción:</label> <br>
+                    <input id="Descripcion" type="text" name="" class="form-control" maxlength="50" required>
+                    <br>
+                    <select id="SeleccionarRolMod" name="RolId" class="form-control">
+                        @foreach (CondominioHosting.Models.AccesoTable AT in ViewBag.acceso)
+                        {
+                            <option value="@AT.AccesoId">@AT.AccesNombre</option>
+                        }
+                    </select>
+                    <a id="ModDetail" href="#">Agregar al detalle</a>
+
+                    <table class="ui table" id="ModDetalle">
+
+                        <thead>
+                            <tr>
+                                <th style="display:none;">
+                                <th>Rol</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                     
+
+                    </table>
+
+                    <input id="modificar" type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana3">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Registrar Rol</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Rol/Index">
+
+                    <label>Condominio:</label>
+                    <select class="form-control" name="CondominioId">
+                        @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Ct in ViewBag.condominio)
+                        {
+                            <option value="@Ct.CondominioId">@Ct.CondominioNombre</option>
+                        }
+                    </select>
+
+
+                    <label>Descripción:</label> <br>
+                    <input type="text" name="Descripcion" class="form-control" maxlength="50" required>
+                    <label>Agregar acceso:</label> 
+
+                    <select id="SeleccionarRol" name="RolId" class="form-control">
+                        @foreach (CondominioHosting.Models.AccesoTable AT in ViewBag.acceso)
+                        {
+                            <option value="@AT.AccesoId">@AT.AccesNombre</option>
+                        }
+                    </select>
+                    <a id="addDetail" href="#">Agregar al detalle</a>
+                    <a style="display:none;" href="#" id="eliminateDetail" class="float-right">Eliminar detalles</a>
+
+                    <table class="ui table" id="Detalle">
+
+                        <thead>
+                            <tr>
+                                <th style="display:none;">
+                                <th>Rol</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        
+
+                    </table>
+                    <br>
+                    <input type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="#ventana3" id="btn-agregar" class="btn btn-success" data-toggle="modal">Agregar</a>
+
+@section script{
+
+    <script>
+        var id;
+        $(function () {
+
+            //<a class='deletDetail btn btn-danger float-right' href='#' id='" + linea + "'>Quitar</a>
+
+            
+
+            linea = 0;
+            lineaMod = 0;
+            $("#addDetail").on("click", function (e) {
+                $("#eliminateDetail").show();
+                var AccesoId = $('#SeleccionarRol option:selected').val();
+                var AccesNombre = $('#SeleccionarRol option:selected').text();
+
+                template =
+                    '<tr><td style="display:none;">' + "<input type='hidden' name='DetalleRolTables[" + linea + "][AccesoId]' value=" + "'" + AccesoId + "' />" +
+                    "</td><td class='nombreAcceso'>" + AccesNombre +
+                    "</td> <td></td> </tr>";
+                linea = linea + 1;
+                $("#Detalle").append(template);
+
+                var x = document.getElementById("SeleccionarRol");
+                x.remove(x.selectedIndex);
+            });
+
+            //$("#ModDetalle").on("click", ".deletDetail", function (e) {
+                //v = $("input", $(this).parent().parent()).val();
+                //$("#SeleccionarRol").append("<option value=" + v + ">" + $(this).parent().parent().text() + "</option>");
+                //$(this).parent().parent().remove();
+
+            //});
+
+            $("#eliminateDetail").on("click", function (e) {
+
+                $("#eliminateDetail").hide();
+                linea = 0;
+                $("#Detalle > tr").remove();
+
+                $('#SeleccionarRol option').remove();
+                var datos;
+                $.ajax({
+                    type: "GET",
+                    url: "/Rol/CambiarCombo/",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: datos,
+                    success: function (data) {
+                        debugger;
+                        $('#SelectInquilino').append("<option value='0'>Seleccione</option>");
+                        $.each(data, function (key, value) {
+
+                            $("#SeleccionarRol").append("<option value=" + value.AccesoId + ">" + value.AccesNombre + "</option>");
+                        });
+
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+                });
+
+            });
+           
+
+            $("#Buscar").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#Tabla tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            
+
+        });
+
+        $(document).ready(function () {
+            var idMod = 0;
+            $(".mod").on("click", function () {
+
+                lineaMod = 0;
+                $("#ModDetalle > tr").remove();
+                idMod = $(this).attr("value");
+                id = $(this).attr("value");
+                var data;
+                $.ajax({
+                    method: "GET", url: "/Rol/ObtenerDatos/" + id, data: data,
+                    success: function (data) {
+                        debugger;
+                        document.getElementById('Descripcion').value = data;
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+
+                id2 = $(this).attr("value");
+                var data2 = { "Id" : id2};
+
+                $.ajax({
+                    method: "GET", url: "/Rol/ObtenerDatos2/" + id2, data: data2,
+                    success: function (data) {
+                        debugger;
+                        $.each(data, function (key, value) {
+                                        
+                                        template =
+                                            '<tr id="" class="detalleRow" value=" ' + value.DetalleRolId + ' "><td style="display:none;">' + "<input type='hidden' name='DetalleRolTables[" + lineaMod + "][AccesoId]' value=" + "'" + value.DetalleRolId + "' />" +
+                                            "</td><td class='nombreAcceso'>" + value.AccesNombre +
+                                            "</td> <td> <a class='borrarDetalle btn btn-danger float-right' href='#'>Borrar</a> </td> </tr>";
+                                        lineaMod = lineaMod + 1;
+                                        $("#ModDetalle").append(template);
+
+                                    });
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+                });
+
+                //$.ajax({
+                //    method: "GET", url: "/Rol/ObtenerDatos2/" + id2, data: data2,
+                //    success: function (data) {
+                //        debugger;
+                //        $.each(data, function (key, value) {
+                //            alert("hola");
+                //            //template =
+                //            //    '<tr><td style="display:none;">' + "<input type='hidden' name='DetalleRolTables[" + lineaMod + "][AccesoId]' value=" + "'" + value.AccesoId + "' />" +
+                //            //    "</td><td class='nombreAcceso'>" + value.AccesNombre +
+                //            //    "</td> <td></td> </tr>";
+                //            //lineaMod = lineaMod + 1;
+                //            //$("#ModDetalle").append(template);
+
+                //        });
+                //    },
+                //    error: function (data) {
+                //        debugger;
+                //        alert('error');
+                //    }
+
+                //});
+
+            });
+
+            $("#modificar").on("click", function () {
+                var descripcion = document.getElementById('Descripcion').value;
+                var data2 = { "descripcion": descripcion };
+                $.ajax({
+                    method: "POST", url: "/Rol/Modificar/" + id, data: data2
+                });
+            });
+
+            $("#ModDetail").on("click", function (e) {
+                var AccesoId = $('#SeleccionarRolMod option:selected').val();
+                var AccesNombre = $('#SeleccionarRolMod option:selected').text();
+
+                var data = { "IdAcceso" : AccesoId };
+                $.ajax({
+                    method: "POST", url: "/Rol/AgregarDetalle/" + idMod, data: data,
+                    success: function (data) {
+                        if (data.success) {
+                            template =
+                               '<tr id="" class="detalleRow" value="  "><td style="display:none;">' + "<input type='hidden' name='DetalleRolTables[" + lineaMod + "][AccesoId]' value=" + "'" + data.DetalleRolId + "' />" +
+                               "</td><td class='nombreAcceso'>" + AccesNombre +
+                               "</td> <td> <a class='borrarDetalle btn btn-danger float-right' href='#'>Borrar</a> </td> </tr>";
+                            lineaMod = lineaMod + 1;
+                            $("#ModDetalle").append(template);
+                        } else {
+                            alert("Este rol ya está agregado, por favor seleccione otro.");
+                        }
+
+                    },
+                    error: function (data) {
+                        alert("error");
+                    }
+                });
+
+            });
+
+            $("#ModDetalle").on("click", ".borrarDetalle", function (e) {
+                
+                
+                var id = $("input", $(this).parent().parent()).val();
+                $(this).parent().parent().attr("id","newId");
+                var data;
+                $.ajax({
+                    method: "GET", url: "/Rol/EliminarDetalle/" + id, data: data,
+                    success: function (data) {
+                        $("#newId").remove();
+                        
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+
+            });
+
+        });
+
+    </script>
+}

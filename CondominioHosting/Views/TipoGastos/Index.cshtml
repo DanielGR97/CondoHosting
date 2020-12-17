@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "Tipo de Gastos";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<div id="header">
+    <h3>Tipos de gastos</h3>
+
+    <br>
+    <input type="text" name="" id="Buscar" placeholder="Ingrese el dato a buscar:">
+    <br>
+</div>
+
+<hr>
+
+<table>
+    <tr>
+        <th>Condominio</th>
+        <th>Descripción</th>
+        <th>Fijo</th>
+        <th>Más</th>
+    </tr>
+    <tbody id="Tabla">
+        @foreach (CondominioHosting.Models.BusquedaTipoGastoProcResult TG in ViewBag.listado)
+        {
+            <tr>
+                <td>@TG.CondominioNombre</td>
+                <td>@TG.TipoGastoDescripcion </td>
+                <td>@TG.TipoGastoFijoB</td>
+                <td>
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+
+                        <div class="dropdown-menu">
+                            <a href="#ventana1" data-toggle="modal" class="dropdown-item mod" value="@TG.TipoGastoId">Modificar</a>
+                        </div>
+
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Modificar Tipo de gastos</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <label>Descripción:</label> <br>
+                    <input id="Descripcion" type="text" name="TipoGastoDescripcion" class="form-control" maxlength="50" required>
+                    <label>Gasto fijo:</label>
+                    <select id="Fijo" name="TipoGastoFijo" class="form-control">
+                        <option value="true">Si</option>
+                        <option value="false">No</option>
+                    </select> <br>
+                    <input id="modificar" type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana3">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Registrar Tipo de gasto</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/TipoGastos/Index">
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <label>Condominio:</label>
+                        <select class="form-control" name="CondominioId">
+                            @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Ct in ViewBag.condominios)
+                            {
+                                <option value="@Ct.CondominioId">@Ct.CondominioNombre</option>
+                            }
+                        </select>
+                    }
+                    @if (User.IsInRole("IngresosYGastos"))
+                    {
+                        <input type="hidden" name="CondominioId" value="@ViewBag.CondominioId" />
+                    }
+                    <label>Descripción:</label> <br>
+                    <input type="text" name="TipoGastoDescripcion" class="form-control"  maxlength="50" required>
+                    <label>Gasto fijo:</label>
+                    <select name="TipoGastoFijo" class="form-control">
+                        <option value="true">Si</option>
+                        <option value="false">No</option>
+                    </select> <br>
+                    <input type="hidden" name="TipoGastoActivo" value="true">
+                    <input type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="#ventana3" id="btn-agregar" class="btn btn-success" data-toggle="modal">Agregar</a>
+
+@section script{
+    <script>
+        var id;
+        $(document).ready(function () {
+
+            $("#Buscar").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#Tabla tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $(".mod").on("click", function () {
+                id = $(this).attr("value");
+                var data;
+                $.ajax({
+                    method: "GET", url: "/TipoGastos/ObtenerDatos/" + id, data: data,
+                    success: function (data) {
+                        debugger;
+                        document.getElementById('Descripcion').value = data.descripcion;
+                        document.getElementById('Fijo').value = data.fijo;
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+
+               
+            });
+
+            $("#modificar").on("click", function () {
+                var descripcion = document.getElementById('Descripcion').value;
+                var fijo = document.getElementById('Fijo').value;
+                var data2 = { "descripcion": descripcion, "fijo": fijo };
+                $.ajax({ method: "POST", url: "/TipoGastos/Modificar/" + id, data: data2 });
+            });
+
+
+        });
+    </script>
+}

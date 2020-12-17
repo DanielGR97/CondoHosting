@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "Menú";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<h3 class="MH" style="text-align:center">Reclamaciones</h3>
+
+<table class="Tabla">
+    <tr>
+        <th>Condominio</th>
+        <th>Inquilino</th>
+        <th>Descripción</th>
+        <th>Nota</th>
+        <th>Costo</th>
+        <th>Estado</th>
+    </tr>
+
+    <tbody id="Tabla">
+        @foreach (CondominioHosting.Models.BusquedaReclamacionProcResult Ct in ViewBag.reclamaciones)
+        {
+            <tr>
+                <td>@Ct.CondominioNombre</td>
+                <td>@Ct.PropiedadCodigo</td>
+                <td>@Ct.ReclamacionDescripcion</td>
+                <td>@Ct.ReclamacionNota</td>
+                <td>$ @Ct.ReclamacionCosto</td>
+                <td>@Ct.TipoReclamacionDescripcion</td>
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>
+
+<h3 class="MH2" style="text-align:center">Ingresos</h3>
+<table class="Tabla">
+    <tr>
+        <th>Condominio</th>
+        <th>Descripción</th>
+        <th>Tipo</th>
+        <th>Fecha</th>
+        <th>Cantidad</th>
+    </tr>
+    <tbody>
+        @foreach (CondominioHosting.Models.BusquedaIngresoProcResult I in ViewBag.ingresos)
+        {
+
+            <tr>
+                <td>@I.CondominioNombre</td>
+                <td>@I.IngresoDescripcion</td>
+                <td>@I.TipoIngresoDescripcion</td>
+                <td>@I.IngresoFecha.ToShortDateString()</td>
+                <td>US$ @I.IngresoCantidad</td>
+
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+
+<h3 class="MH2" style="text-align:center" >Gastos</h3>
+
+<table class="Tabla">
+    <tr>
+        <th>Condominio</th>
+        <th>Descripción</th>
+        <th>Tipo</th>
+        <th>Fecha</th>
+        <th>Cantidad</th>
+    </tr>
+    <tbody class="MTabla">
+        @foreach (CondominioHosting.Models.BusquedaGastoProcResult G in ViewBag.gastos)
+        {
+            <tr>
+                <td>@G.CondominioNombre</td>
+                <td>@G.GastoDescripcion</td>
+                <td>@G.TipoGastoDescripcion</td>
+                <td>@G.GastoFecha.ToShortDateString()</td>
+                <td>US$ @G.GastoCantidad</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<style>
+    .MH{
+    margin-top:30px;
+}
+
+.MH2{
+    margin-top:50px;
+}
+
+</style>

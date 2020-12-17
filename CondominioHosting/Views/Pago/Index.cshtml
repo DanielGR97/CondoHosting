@@ -1,0 +1,221 @@
+﻿
+@{
+    ViewBag.Title = "Alquiler Propiedades";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section css{
+    <link rel="stylesheet" type="text/css" href="../../Resources/CSS/Pago.css">
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<h3>Alquiler de propiedad</h3>
+
+<form method="post" action="/Pago/Index" id="Ingresar" onsubmit="return isValidForm()">
+    <label>Inquilino:</label>
+    <select class="form-control" id="Inquilino" name="HistorialAlquiladoInquilinoId" required>
+        @foreach (CondominioHosting.Models.BusquedaInquilinoProcResult I in ViewBag.inqui)
+        {
+            <option value="@I.PersonaId">@I.PersonaNombre @I.PersonaApellido</option>
+        }
+    </select>
+    <label>Propiedad:</label>
+    <select id="Propiedad" class="form-control select"  name="HistorialAlquiladoPropiedadId" required>
+        @foreach (CondominioHosting.Models.ComboBoxPropiedadDisponibleProcResult Propiedad in ViewBag.propi)
+        {
+            <option value="@Propiedad.PropiedadId">@Propiedad.PropiedadCodigo</option>
+        }
+
+    </select>
+    <label for="fecha">Fecha de alquiler:</label>
+    <input type="date" class="form-control" id="FechaI" name="HistorialAlquiladoFechaAlquiler" placeholder="00/00/0000" required><br>
+    <label for="fecha">Fecha de terminación de contrato:</label>
+    <input type="date" class="form-control" id="FechaF" name="HistorialAlquiladoFechaTerminacion" placeholder="00/00/0000" required><br>
+    <label>Abogado:</label>
+    <select class="form-control" id="Abogado" name="HistorialAlquiladoAbogadoId">
+        @foreach (CondominioHosting.Models.BusquedaEmpleadoProcResult em in ViewBag.empleado)
+        {
+            <option value="@em.PersonaId">@em.PersonaNombre @em.PersonaApellido</option>
+        }
+    </select> <br />
+    <label>Servicios</label>
+    <select class="form-control" id="Tipo">
+        @foreach (CondominioHosting.Models.BusquedaServicioProProcResult servicios in ViewBag.servicios)
+        {
+            <option value="@servicios.ServicioId">@servicios.ServicioDescripcion</option>
+        }
+    </select>
+    <a id="addDetail" style="margin-top:5px; margin-bottom:5px;" href="#">Agregar al detalle</a>
+    <br />
+
+    <table class="ui table" id="Detalle">
+        <thead>
+            <tr>
+                <th style="display:none;">
+                <th>Servicio</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+    <br />
+    <div class="form-group has-success float-right" id="botones">
+        <div id="botones2">
+            <a><input type="submit" class="float-right btn btn-success" name="" id="guardar" value="Guardar" href=""></a>
+
+        </div>
+    </div>
+</form>
+
+@section script{
+    <script>
+        $(document).ready(function () {
+
+            $('#Inquilino').on("change", function (e) {
+                $('#Propiedad option').remove();
+                var IdCondominio = $('#Inquilino').val();
+                if (IdCondominio > 0) {
+                    var datos = { "condominio": IdCondominio };
+                    $.ajax({
+                        type: "GET",
+                        url: "/Pago/CambiarCombo/",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: datos,
+                        success: function (data) {
+                            debugger;
+                            if (data != null)
+
+                            $.each(data, function (key, value) {
+
+                                $("#Propiedad").append("<option value=" + value.PropiedadId + ">" + value.PropiedadCodigo + "</option>");
+                            });
+
+                        },
+                        error: function (data) {
+                            debugger;
+                            alert('error');
+                        }
+                    });
+                } else {
+
+                }
+
+            });
+
+            linea = 0;
+            lineaMod = 0;
+            $("#addDetail").on("click", function (e) {
+                var ServicioId = $('#Tipo option:selected').val();
+                var ServicioDescripcion = $('#Tipo option:selected').text();
+                id = $("#Propiedad option:selected").attr("value");
+
+                linea = 0;
+                var data = { "ServicioId": ServicioId };
+                $.ajax({
+                    method: "POST", url: "/Pago/AgregarDetalle/" + id, data: data,
+                    success: function (data) {
+                        if (data.success) {
+                            template =
+                                '<tr><td style="display:none;">' + "<input type='hidden' name='DetalleServicioProIds[" + linea + "][ServicioId]' value=" + "'" + data.DetalleServicioId + "' />" +
+                                "</td><td>" + ServicioDescripcion +
+                                "</td><td> <a class='borrarDetalle btn btn-danger float-right' href='#'>Borrar</a> </td></tr>";
+                            linea = linea + 1;
+                            $("#Detalle").append(template);
+
+                        } else {
+                            alert("Este servicio ya está agregado, por favor seleccione otro.");
+                        }
+
+                    },
+                    error: function (data) {
+                        alert("error");
+                    }
+                });
+
+
+                
+            });
+
+            $("#Propiedad").on("change", function () {
+                $("#Detalle > tr").remove();
+                id = $("#Propiedad option:selected").attr("value");
+                lineaMod = 0;
+                var data = { "Id": id };
+                $.ajax({
+                    method: "GET", url: "/Pago/ObtenerDatos/" + id, data: data,
+                    success: function (data) {
+                        debugger;
+                        $.each(data, function (key, value) {
+
+                            template =
+                                '<tr><td style="display:none;">' + "<input type='hidden' name='DetalleServicioId[" + lineaMod + "][PropiedadId]' value=" + "'" + value.DetalleServicioId + "' />" +
+                                "</td><td>" + value.ServicioDescripcion + "</td><td> <a class='borrarDetalle btn btn-danger float-right' href='#'>Borrar</a> </td> </tr>";
+                            lineaMod = lineaMod + 1;
+                            $("#Detalle").append(template);
+
+                        });
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+
+            });
+
+            $("#Detalle").on("click", ".borrarDetalle", function () {
+                var id = $("input", $(this).parent().parent()).val();
+                $(this).parent().parent().attr("id", "newId");
+                var data;
+                $.ajax({
+                    method: "GET", url: "/Pago/EliminarDetalle/" + id, data: data,
+                    success: function (data) {
+                        $("#newId").remove();
+
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+            });
+
+            document.getElementById("Ingresar").onsubmit = function () {
+
+
+                var x = document.getElementById("FechaI").valueAsDate;
+                var y = document.getElementById("FechaF").valueAsDate;
+                var nacimiento = moment(x);
+                var hoy = moment();
+                var anios = y.diff(x, "years");
+                var mes = y.diff(x, "month");
+                var dia = y.diff(x, "day")
+
+                if (anios >= 0 && mes >= 0 && dia >= 0) {
+                    return true;
+                } else {
+                    alert("Fechas Incorrectas");
+                    return false;
+                }
+
+
+            };
+        });
+    </script>
+
+
+
+}

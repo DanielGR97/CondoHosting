@@ -1,0 +1,155 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	font-family: calibri;
+}
+
+header{
+	position: fixed;
+	top: 0%;
+	width: 100%;
+	height: 10vh;
+	background-color: #111E60;
+	z-index: 1;
+	color: white;
+	opacity: 60;
+	-webkit-box-shadow: 0 0 20px 2px #303030;
+	box-shadow: 0 0 20px 2px black;
+}
+
+body{
+	background-color: #f2f2f2;
+}
+
+
+#logo{
+	width: 300px;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+}
+	
+#usuario{
+	height: 100%;
+	width: 300px;
+	position: absolute;
+	right: 0px;
+
+}
+
+#usuario p{
+	right: 10px;
+	top:20px;
+	position: absolute;
+}
+
+#usuario img{
+	border-radius: 100%;
+	height: 40px;
+	width: 40px;
+	position: absolute;
+	right: 150px;
+	top:10px;
+}
+
+.principal{
+	margin-top: 10vh;
+
+}
+
+#accordion{
+	position: fixed;
+	margin-top: 5vh;
+
+}
+
+#accordion * {
+	padding-left: 2px;
+}
+
+.side{
+	padding-left: 0px;
+	padding-right: 0px;
+	padding: 0px;
+	height: 90vh;
+	background-color: #111360;
+	-webkit-box-shadow: 0 0 20px 2px #303030;
+	box-shadow: 0 0 20px 2px #303030;
+	background-color: #2E3740;
+	position: fixed;
+}
+
+
+.panel-default{
+	
+	/*border-bottom: 1px solid #ccc;*/
+}
+
+.panel-default div:hover {
+	background-color: #252b31;
+	cursor: pointer;
+}
+
+#accordion i, h4{
+	color: #d6d6d6;
+}
+
+#accordion i{
+	position: relative;
+	top: 3px;
+}
+
+.panel-collapse{
+	background-color: #252b31;
+}
+
+#accordion ul{
+	padding-top: 0px;
+	margin: 0px;
+	background-color: #252b31;
+}
+
+#accordion li{
+	padding: 5px 20px;
+	background-color: #252b31;
+	color: white;
+	border: 0px;
+	font-size: 16px;
+}
+
+
+.seccion{
+	padding-left: 20vh;
+	
+
+}
+
+form{
+	margin-top: 20px;
+	margin-bottom: 40px;
+	
+}
+
+form h3{
+	color:black;
+	text-align: center;
+}
+
+form select{
+	width: 100px;
+}
+
+form label{
+	font-size: 17px;
+	margin-top: 5px;
+}
+
+form textarea{
+	height: 80px;
+	resize: none;
+}
+
+form input[type=submit]{
+	font-size: 18px;
+	margin-bottom: 20px;
+}

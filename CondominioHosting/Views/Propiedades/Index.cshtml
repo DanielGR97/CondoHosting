@@ -1,0 +1,404 @@
+﻿
+@{
+    ViewBag.Title = "Propiedades";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<div id="header">
+    <h3>Propiedades</h3>
+    <br>
+
+    <input type="text" id="Buscar" name="" placeholder="Ingrese el dato a buscar:">
+    <br>
+</div>
+
+<hr>
+
+<table id="FullTable">
+    
+    <tr>
+        <th>Condominio</th>
+        <th>Código</th>
+        <th>Habitaciones</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Para alquilar</th>
+        <th>Más</th>
+    </tr>
+
+    <tbody id="Tabla">
+        @foreach (CondominioHosting.Models.BusquedaPropiedadProcResult propi in ViewBag.listado)
+        {
+            <tr>
+                <td>@propi.CondominioNombre</td>
+                <td>@propi.PropiedadCodigo</td>
+                <td>@propi.PropiedadHabitaciones</td>
+                <td>@propi.PropiedadDescripcion</td>
+                <td>@String.Format("{0:n2}", propi.PropiedadPrecio)</td>
+                <td>@propi.PropiedadDisponible</td>
+                <td>
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+
+                        <div class="dropdown-menu">
+                            @*<a href="#ventana4" data-toggle="modal" class="dropdown-item">Mantenimiento</a>*@
+                            <a href="#ventana3" data-toggle="modal" class="dropdown-item mod" value="@propi.PropiedadId">Modificar</a>
+                            <a href="#ventana2" data-toggle="modal" class="dropdown-item des" value="@propi.PropiedadId">Deshabilitar</a>
+
+                        </div>
+
+                    </div>
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+
+
+</table>
+
+<a href="#ventana1" id="btn-agregar" class="btn btn-success" data-toggle="modal">Agregar</a>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Registrar Propiedad</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            
+            <div class="modal-body">
+                <form method="post" action="/Propiedades/Index">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <label>Condominio:</label>
+                        <select class="form-control" name="PropiedadCondominioId">
+                            @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Ct in ViewBag.condominios)
+                            {
+                                <option value="@Ct.CondominioId">@Ct.CondominioNombre</option>
+                            }
+                        </select>
+                    }
+                    @if (User.IsInRole("Propiedades"))
+                    {
+                        <input type="hidden" name="PropiedadCondominioId" value="@ViewBag.CondominioId" />
+                    }             
+                    <label>Código:</label>
+                    <input type="text" name="PropiedadCodigo" class="form-control" maxlength="10" required>
+                    <label>Descripción:</label>
+                    <textarea class="form-control" name="PropiedadDescripcion" required></textarea>
+                    <label>Numéro de habitaciones:</label>
+                    <input type="number" name="PropiedadHabitaciones" class="form-control" required/>
+                    <label>Numéro de baños:</label>
+                    <input type="number" name="PropiedadBanos" class="form-control" required />
+                    <label>Terraza:</label>
+                    <select class="form-control" name="PropiedadTerraza" required>
+                        <option value="true">Si</option>
+                        <option value="false">no</option>
+                    </select>
+                    <label>Precio:</label>
+                    <input type="number" name="PropiedadPrecio" class="form-control" required/>
+                    <label>Servicios:</label>
+                    <select id="SeleccionarServicio" class="form-control" name="ServicioId">
+                        @foreach (CondominioHosting.Models.BusquedaServicioProProcResult Se in ViewBag.servicios)
+                        {
+                            <option value="@Se.ServicioId">@Se.ServicioDescripcion</option>
+
+                        }
+                    </select>
+                    <a id="addDetail" href="#">Agregar al detalle</a>
+
+                    <table class="ui table" id="Detalle">
+                        <tr>
+                            <th style="display:none;">
+                            <th>Servicio</th>
+                        </tr>
+
+                    </table>
+                    <br>
+                    <input type="hidden" name="PropiedadActivo"  value="true" />
+
+            </div>
+                
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <input type="submit" class="float-right btn btn-success" name="" value="Guardar">
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ventana2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deshabilitar Propiedad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea deshabilitar esta propiedad? </p>
+            </div>
+            <div class="modal-footer">
+                <button id="deshabilitar" type="button" class="btn btn-primary" data-dismiss="modal">Deshabilitar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana3">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Modificar Propiedad</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label>Número de propiedad (Código):</label>
+                    <input type="text" id="Codigo" name="PropiedadCodigo" class="form-control" maxlength="10" required>
+                    <label>Descripción:</label>
+                    <textarea class="form-control" id="Descripcion" name="PropiedadDescripcion" required></textarea>
+                    <label>Numéro de habitaciones:</label>
+                    <input type="number" id="Habitaciones" name="PropiedadHabitaciones" class="form-control" required />
+                    <label>Numéro de baños:</label>
+                    <input type="number" id="Banos" name="PropiedadBanos" class="form-control" required />
+                    <label>Terraza:</label>
+                    <select class="form-control" id="Terraza" name="PropiedadTerraza" required>
+                        <option value="true">Si</option>
+                        <option value="false">No</option>
+                    </select>
+                    <label>Precio:</label>
+                    <input type="number" id="Precio" name="PropiedadPrecio" class="form-control" required />
+                    <label>Servicios:</label>
+                    <select id="SeleccionarServicio2" class="form-control" name="ServicioId">
+                        @foreach (CondominioHosting.Models.BusquedaServicioProProcResult Se in ViewBag.servicios)
+                        {
+                            <option value="@Se.ServicioId">@Se.ServicioDescripcion</option>
+
+                        }
+                    </select>
+                    <a id="addDetail2" href="#">Agregar al detalle</a>
+
+                    <table class="ui table" id="Detalle2">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">
+                                <th>Servicio</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                    </table>
+                    <br>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <input id="modificar" type="submit" class="float-right btn btn-success" name="" value="Guardar">
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana4">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Modificar Propiedades</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+
+            <div class="modal-body">
+                
+        </div>
+    </div>
+</div>
+
+@section script{
+    <script>
+        var id;
+        $(document).ready(function () {
+
+
+            $(".des").on("click", function () {
+                id = $(this).attr("value");
+            });
+
+
+
+            $("#deshabilitar").on("click", function () {
+                var data;
+                $.ajax({ method: "POST", url: "/Propiedades/Deshacer/" + id, data: data });
+                $("#FullTable").load(" #FullTable");
+
+            });
+
+            $(".mod").on("click", function () {
+                id = $(this).attr("value");
+                $("#Detalle2 > tr").remove();
+                var data;
+                $.ajax({
+                    method: "GET", url: "/Propiedades/ObtenerDatos/" + id, data: data,
+                    success: function (data) {
+                        debugger;
+                        document.getElementById('Codigo').value = data.codigo;
+                        document.getElementById('Descripcion').value = data.descripcion;
+                        document.getElementById('Habitaciones').value = data.habitaciones;
+                        document.getElementById('Banos').value = data.banos;
+                        document.getElementById('Terraza').value = data.terraza;
+                        document.getElementById('Precio').value = data.precio;
+                    },
+                    error: function (data) {
+                        debugger;
+                        //alert('error');
+                    }
+
+                });
+
+            });
+
+            $("#modificar").on("click", function () {
+                var codigo = document.getElementById('Codigo').value;
+                var descripcion = document.getElementById('Descripcion').value;
+                var habitaciones = document.getElementById('Habitaciones').value;
+                var banos = document.getElementById('Banos').value;
+                var terraza = document.getElementById('Terraza').value;
+                var precio = document.getElementById('Precio').value;
+                var data2 = { "codigo": codigo, "descripcion": descripcion, "habitaciones": habitaciones, "banos": banos, "terraza": terraza ,"precio": precio };
+                $.ajax({ method: "POST", url: "/Propiedades/Modificar/" + id, data: data2 });
+            });
+
+            linea = 0;
+            $("#addDetail").on("click", function (e) {
+                var ServicioId = $('#SeleccionarServicio option:selected').val();
+                var ServicioDescripcion = $('#SeleccionarServicio option:selected').text();
+
+                template =
+                    '<tr><td style="display:none;">' + "<input type='hidden' name='DetalleServicioProIds[" + linea + "][ServicioId]' value=" + "'" + ServicioId + "' />" +
+                    "</td><td>" + ServicioDescripcion +
+                    "</td> </tr>";
+                linea = linea + 1;
+                $("#Detalle").append(template);
+
+                var x = document.getElementById("SeleccionarServicio");
+                x.remove(x.selectedIndex);
+            });
+
+
+            linea2 = 0;
+            lineaMod2 = 0;
+            $("#addDetail2").on("click", function (e) {
+                var ServicioId2 = $('#SeleccionarServicio2 option:selected').val();
+                var ServicioDescripcion2 = $('#SeleccionarServicio2 option:selected').text();
+
+                linea2 = 0;
+                var data = { "ServicioId": ServicioId2 };
+                $.ajax({
+                    method: "POST", url: "/Propiedades/AgregarDetalle/" + id, data: data,
+                    success: function (data) {
+                        if (data.success) {
+                            template =
+                                '<tr><td style="display:none;">' + "<input type='hidden' name='DetalleServicioProIds[" + linea2 + "][ServicioId]' value=" + "'" + data.DetalleServicioId + "' />" +
+                                "</td><td>" + ServicioDescripcion2 +
+                                "</td><td> <a class='borrarDetalle btn btn-danger float-right' href='#'>Borrar</a> </td></tr>";
+                            linea2 = linea2 + 1;
+                            $("#Detalle2").append(template);
+
+                        } else {
+                            alert("Este servicio ya está agregado, por favor seleccione otro.");
+                        }
+
+                    },
+                    error: function (data) {
+                        alert("error");
+                    }
+                });
+
+
+
+            });
+
+            $("#Buscar").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#Tabla tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+
+            $(".mod").on("click", function () {
+                $("#Detalle2 > tr").remove();
+                id = $(this).attr("value");
+                lineaMod = 0;
+                var data = { "Id": id };
+                $.ajax({
+                    method: "GET", url: "/Propiedades/ObtenerDatos2/" + id, data: data,
+                    success: function (data) {
+                        debugger;
+                        $.each(data, function (key, value) {
+
+                            template =
+                                '<tr><td style="display:none;">' + "<input type='hidden' name='DetalleServicioId[" + lineaMod + "][PropiedadId]' value=" + "'" + value.DetalleServicioId + "' />" +
+                                "</td><td>" + value.ServicioDescripcion + "</td><td> <a class='borrarDetalle btn btn-danger float-right' href='#'>Borrar</a> </td> </tr>";
+                            lineaMod = lineaMod + 1;
+                            $("#Detalle2").append(template);
+
+                        });
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+
+            });
+
+            $("#Detalle2").on("click", ".borrarDetalle", function () {
+                var idb = $("input", $(this).parent().parent()).val();
+                $(this).parent().parent().attr("id", "newId");
+                var data;
+                $.ajax({
+                    method: "GET", url: "/Propiedades/EliminarDetalle/" + idb, data: data,
+                    success: function (data) {
+                        $("#newId").remove();
+
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+            });
+
+
+        });
+    </script>
+}

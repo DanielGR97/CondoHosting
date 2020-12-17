@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "Renta";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<script>
+    $(document).ready(function () {
+
+
+        //$('#SelectFecha').on("change", function (e) {
+        //    var fecha = $("#SelectFecha").val();
+        //    f = "a";
+        //    var data2 = { "fecha" : fecha };
+        //    alert(fecha);
+        //    $.ajax({
+        //        method: "GET", url: "/Pago/ObtenerRenta/", data: data2,
+        //        success: function () {
+        //            setTimeout(
+        //          function () {
+        //              location.reload();
+        //          }, 0001);
+        //            debugger;
+        //        },
+        //        error: function () {
+        //            debugger;
+        //            setTimeout(
+        //          function () {
+        //              location.reload();
+        //          }, 0001);
+        //            alert('error');
+        //        }
+
+        //    });
+
+        //});
+
+        $('#propiedad').on("change", function (e) {
+
+            var IdCondominio = $('#propiedad').val();
+            var datos = { "idPropiedad": IdCondominio };
+            if (IdCondominio > 0) {
+                alert(IdCondominio);
+                $.ajax({
+                    type: "GET",
+                    url: "/Pago/CambiarRenta/",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: datos,
+                    success: function (data) {
+                        debugger;
+                        document.getElementById('InquilinoInput').value = data.inquilino;
+                        document.getElementById('CantidadInput').value = data.cantidad;
+                        document.getElementById('InquilinoId').value = data.inquilinoId;
+                        $("#InquilinoInput").css("display", "");
+                        $("#CantidadInput").css("display", "");
+                        $("#CantidadLabel").css("display", "");
+                        $("#InquilinoLabel").css("display", "");
+                        $("#guardarButton").css("display", "");
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+                });
+            }
+
+
+        });
+    });
+</script>
+
+<h2>Renta</h2>
+<br />
+
+<form method="post" action="/Pago/Renta">
+    <input id="SelectFecha" name="IngresoFecha" type="month" class="form-control" disabled required value="@DateTime.Now.ToString("yyyy-MM")" />
+    <br />
+
+    <label>Tipo de ingreso:</label>
+    <select class="form-control tipoIngreso" name="IngresoTipoIngresoId" id="TipoSelect" required>
+        @foreach (CondominioHosting.Models.BusquedaTipoIngresoProcResult TipoIngresos in ViewBag.tipoIngreso)
+        {
+            <option value="@TipoIngresos.TipoIngresoId">@TipoIngresos.TipoIngresoDescripcion</option>
+        }
+    </select>
+
+    <br />
+    <label>Propiedad:</label>
+    <select class="form-control" id="propiedad" required>
+        <option value="0">Seleccione:</option>
+        @foreach (CondominioHosting.Models.ComboBoxPropiedadNoDisponibleProcResult n in ViewBag.propiedad)
+        {
+            <option value="@n.PropiedadId">@n.PropiedadCodigo</option>
+        }
+    </select>
+
+    <input type="hidden" name="IngresoActivo" value="true">
+
+
+    <label style="display:none;" id="CantidadLabel">Cantidad:</label>
+    <input style="display:none;" id="CantidadInput" type="number" name="IngresoCantidad" class="form-control" disabled required> <br>
+
+    <label style="display:none;" id="InquilinoLabel">Inquilino:</label>
+    <input style="display:none;" id="InquilinoInput" type="text" name="" class="form-control" disabled> <br>
+    <input style="display:none;" id="InquilinoId" type="text" name="IngresoInquilinoId" class="form-control" />
+
+    <input style="display:none;" id="guardarButton" type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+
+</form>
+
+<br />
+<table id="FullTable">
+    <tr>
+        <th>Condominio</th>
+        <th>Descripción</th>
+        <th>Tipo</th>
+        <th>Fecha</th>
+        <th>Cantidad</th>
+        <th>Inquilino</th>
+    </tr>
+    <tbody id="Tabla">
+        @foreach (CondominioHosting.Models.BusquedaIngresosRentaProcResult I in ViewBag.listado)
+        {
+
+            <tr>
+                <td>@I.CondominioNombre</td>
+                <td>@I.IngresoDescripcion</td>
+                <td>@I.TipoIngresoDescripcion</td>
+                <td>@I.IngresoFecha</td>
+                <td>US$ @I.IngresoCantidad</td>
+                <td>@I.PersonaNombre @I.PersonaApellido</td>
+
+            </tr>
+        }
+    </tbody>
+
+
+</table>

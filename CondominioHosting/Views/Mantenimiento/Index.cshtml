@@ -1,0 +1,458 @@
+﻿
+@{
+    ViewBag.Title = "Mantenimiento";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+
+<div id="header">
+    <h3>Mantenimiento </h3>
+    <br>
+    <input type="text" id="Buscar" placeholder="Ingrese el dato a buscar:">
+    <br>
+</div>
+<br />
+<table id="FullTable">
+    <tr>
+
+        <th>Empleado</th>
+        <th>Descripción</th>
+        <th>Fecha</th>
+        <th>Propiedad</th>
+        <th>Instalación</th>
+        <th>Más</th>
+    </tr>
+    <tbody id="Tabla">
+        @foreach (CondominioHosting.Models.BusquedaMantenimientoProcResult manten in ViewBag.listado)
+        {
+            <tr>
+                <td>@manten.PersonaNombre @manten.PersonaApellido</td>
+                <td>@manten.Descripcion</td>
+                <td>@manten.MantenimientoFecha</td>
+                <td>@manten.PropiedadCodigo</td>
+                <td>@manten.InstalacionDescripcion</td>
+
+                <td>
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+
+                        <div class="dropdown-menu">
+                            @*<a href="#ventana4" data-toggle="modal" class="dropdown-item">Mantenimiento</a>*@
+                            @if (@manten.PropiedadCodigo == null)
+                            {
+                                <a href="#ventana1" data-toggle="modal" class="dropdown-item mod1" value="@manten.MantenimientoId">Modificar</a>
+                            }
+                            @if (@manten.InstalacionDescripcion == null)
+                            {
+                                <a href="#ventana3" data-toggle="modal" class="dropdown-item mod2" value="@manten.MantenimientoId">Modificar</a>
+                            }
+                            <a href="#ventana2" data-toggle="modal" class="dropdown-item des" value="@manten.MantenimientoId">Deshabilitar</a>
+
+                        </div>
+
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="#ventana4" id="btn-agregar" class="btn btn-success float-right" data-toggle="modal">Agregar</a>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Modificar Mantenimiento</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <label for="Nombres">Empleado:</label>
+                    <select class="form-control" name="" id="ModEmpleado1">
+                        @foreach (CondominioHosting.Models.BusquedaEmpleadoProcResult pers in ViewBag.per)
+                        {
+
+                            <option value="@pers.PersonaId">@pers.PersonaNombre @pers.PersonaApellido</option>
+
+
+                        }
+
+                    </select>
+
+
+                    <label for="insta">Instalación:</label>
+                    <select class="form-control" name="" id="ModInstalacion1">
+                        @foreach (CondominioHosting.Models.BusquedaInstalacionProcResult insta in ViewBag.tipint)
+                        {
+                            <option value="@insta.InstalacionId">@insta.InstalacionDescripcion</option>
+                        }
+
+                    </select><br>
+
+                    <label for="Descripcion">Descripción:</label>
+                    <textarea class="form-control" name="Descripcion" id="ModDescripcion1" requiered>  </textarea><br>
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" class="form-control" name="MantenimientoFecha" id="ModFecha1" placeholder="00/00/0000"><br>
+
+                    <input id="modificar1" type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana3">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Modificar Mantenimiento</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <label for="Nombres">Empleado:</label>
+                    <select class="form-control" name="" id="ModEmpleado2">
+                        @foreach (CondominioHosting.Models.BusquedaEmpleadoProcResult pers in ViewBag.per)
+                        {
+
+                            <option value="@pers.PersonaId">@pers.PersonaNombre @pers.PersonaApellido</option>
+
+
+                        }
+
+                    </select>
+
+                    <label >Propiedad:</label>
+                    <select class="form-control" name="" id="ModPropiedad2">
+                        @foreach (CondominioHosting.Models.BusquedaPropiedadProcResult propiedad in ViewBag.propiedad)
+                        {
+                            <option value="@propiedad.PropiedadId">@propiedad.PropiedadCodigo</option>
+                        }
+
+                    </select><br>
+
+                    <label for="Descripcion">Descripción:</label>
+                    <textarea class="form-control" name="Descripcion" id="ModDescripcion2" requiered>  </textarea><br>
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" class="form-control" name="MantenimientoFecha" id="ModFecha2" placeholder="00/00/0000"><br>
+
+                    <input id="modificar2" type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ventana2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deshabilitar mantenimiento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Esta seguro que desea deshabilitar el mantenimiento? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="deshabilitar" type="button" class="btn btn-primary" data-dismiss="modal">Deshabilitar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana4">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Asignar Mantenimiento</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Mantenimiento/Index">
+                    <div class="form-group has-success" id="formu">
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <label>Condominio:</label>
+                            <select class="form-control" id="Condominio" name="CondominioId">
+                                @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Ct in ViewBag.condo)
+                                {
+                                    <option value="@Ct.CondominioId">@Ct.CondominioNombre</option>
+                                }
+                            </select>
+                        }
+                        @if (User.IsInRole("Propiedades,Instalaciones"))
+                        {
+                            <input type="hidden" name="CondominioId" value="@ViewBag.CondominioId" />
+                        }
+
+                        <label for="Nombres">Empleado:</label>
+                        <select class="form-control" name="MantenPersonaId" id="SeleccionarEmpleado">
+                            @foreach (CondominioHosting.Models.BusquedaEmpleadoProcResult pers in ViewBag.per)
+                            {
+
+                                    <option value="@pers.PersonaId">@pers.PersonaNombre @pers.PersonaApellido</option>
+
+
+                            }
+
+                        </select>
+
+                        <br>
+                        <label>elegir:</label>
+                        <select id="Documento" class="custom-select">
+                            <Option value="1" selected>Instalación</Option>
+                            <Option value="2">Propiedad</Option>
+                        </select><br><br>
+
+                        <label id="InstaLabel" for="insta">Instalación:</label>
+                        <select class="form-control" name="MantenInstalacionId" id="SeleccionarInstalacion">
+                            @foreach (CondominioHosting.Models.BusquedaInstalacionProcResult insta in ViewBag.tipint)
+                            {
+                                <option value="@insta.InstalacionId">@insta.InstalacionDescripcion</option>
+                            }
+
+                        </select><br>
+                        <label id="PropLabel" style="display:none;">Propiedad:</label>
+                        <select class="form-control" name="no" id="SeleccionarPropiedad" style="display:none;">
+                            @foreach (CondominioHosting.Models.BusquedaPropiedadProcResult propiedad in ViewBag.propiedad)
+                            {
+                                <option value="@propiedad.PropiedadId">@propiedad.PropiedadCodigo</option>
+                            }
+
+                        </select><br>
+                        <label for="Descripcion">Descripción:</label>
+                        <textarea class="form-control" name="Descripcion" requiered>  </textarea><br>
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" class="form-control" name="MantenimientoFecha" placeholder="00/00/0000"><br>
+                        <input type="hidden" value="True" name="MantenimientoActivo" />
+
+                        <input type="submit" class="btn btn-success float-right" data-toggle="modal" value="Guardar" />
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section script{
+
+    <script>
+        $(document).ready(function () {
+            $("#Buscar").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#Tabla tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $("#Documento").on("change", function () {
+                if ($("#Documento").val() == "1") {
+                    $("#PropLabel").css("display", "none");
+                    $("#SeleccionarPropiedad").css("display", "none");
+                    $("#InstaLabel").css("display", "");
+                    $("#SeleccionarInstalacion").css("display", "");
+
+                    $("#SeleccionarPropiedad").attr('name', 'no');
+                    $("#SeleccionarInstalacion").attr('name', 'MantenInstalacionId');
+                } else {
+                    $("#PropLabel").css("display", "");
+                    $("#SeleccionarPropiedad").css("display", "");
+                    $("#InstaLabel").css("display", "none");
+                    $("#SeleccionarInstalacion").css("display", "none");
+
+                    $("#SeleccionarPropiedad").attr('name', 'MantenPropiedadId');
+                    $("#SeleccionarInstalacion").attr('name', 'no');
+                }
+            });
+
+            var id = 0;
+            $(".des").on("click", function () {
+                id = $(this).attr("value");
+            });
+
+
+
+            $("#deshabilitar").on("click", function () {
+                var data;
+                $.ajax({ method: "POST", url: "/Mantenimiento/Deshacer/" + id, data: data });
+                $("#FullTable").load(" #FullTable");
+
+            });
+
+            $(".mod1").on("click", function () {
+                id = $(this).attr("value");
+                var data;
+                $.ajax({
+                    method: "GET", url: "/Mantenimiento/ObtenerDatos1/" + id, data: data,
+                    success: function (data) {
+                        debugger;
+                        document.getElementById('ModEmpleado1').value = data.persona;
+                        document.getElementById('ModInstalacion1').value = data.instalacion;
+                        document.getElementById('ModDescripcion1').value = data.descripcion;
+                        document.getElementById('ModFecha1').value = data.fecha;
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+
+            });
+
+            $("#modificar1").on("click", function () {
+                var persona = document.getElementById('ModEmpleado1').value;
+                var instalacion = document.getElementById('ModInstalacion1').value;
+                var descripcion = document.getElementById('ModDescripcion1').value
+                var fecha = document.getElementById('ModFecha1').value;
+
+                var data2 = { "persona": persona, "instalacion": instalacion, "descripcion": descripcion, "fecha": fecha };
+                $.ajax({ method: "POST", url: "/Mantenimiento/Modificar1/" + id, data: data2 });
+            });
+
+            $(".mod2").on("click", function () {
+                id = $(this).attr("value");
+                var data;
+                $.ajax({
+                    method: "GET", url: "/Mantenimiento/ObtenerDatos2/" + id, data: data,
+                    success: function (data) {
+                        debugger;
+                        document.getElementById('ModEmpleado2').value = data.persona;
+                        document.getElementById('ModPropiedad2').value = data.propiedad;
+                        document.getElementById('ModDescripcion2').value = data.descripcion;
+                        document.getElementById('ModFecha2').value = data.fecha;
+                    },
+                    error: function (data) {
+                        debugger;
+                        alert('error');
+                    }
+
+                });
+
+            });
+
+            $("#modificar2").on("click", function () {
+                var persona = document.getElementById('ModEmpleado2').value;
+                var propiedad = document.getElementById('ModPropiedad2').value;
+                var descripcion = document.getElementById('ModDescripcion2').value
+                var fecha = document.getElementById('ModFecha2').value;
+
+                var data2 = { "persona": persona, "propiedad": propiedad, "descripcion": descripcion, "fecha": fecha };
+                $.ajax({ method: "POST", url: "/Mantenimiento/Modificar2/" + id, data: data2 });
+            });
+
+            $('#Condominio').on("change", function (e) {
+                $('#SeleccionarEmpleado option').remove();
+                $('#SeleccionarPropiedad option').remove();
+                $('#SeleccionarInstalacion option').remove();
+                var IdCondominio = $('#Condominio').val();
+                if (IdCondominio > 0) {
+                    var datos = { "condominio": IdCondominio };
+                    $.ajax({
+                        type: "GET",
+                        url: "/Mantenimiento/CambiarCombo/",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: datos,
+                        success: function (data) {
+                            debugger;
+                            if (data != null)
+
+                                $.each(data, function (key, value) {
+
+                                    $("#SeleccionarEmpleado").append("<option value=" + value.PersonaId + ">" + value.PersonaNombre + "</option>");
+                                });
+
+                        },
+                        error: function (data) {
+                            debugger;
+                            alert('error');
+                        }
+                    });
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Mantenimiento/CambiarCombo2/",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: datos,
+                        success: function (data) {
+                            debugger;
+
+                            $.each(data, function (key, value) {
+
+                                $("#SeleccionarInstalacion").append("<option value=" + value.InstalacionId + ">" + value.InstalacionDescripcion + "</option>");
+                            });
+
+                        },
+                        error: function (data) {
+                            debugger;
+                            alert('error');
+                        }
+                    });
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Mantenimiento/CambiarCombo3/",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: datos,
+                        success: function (data) {
+                            debugger;
+
+                            $.each(data, function (key, value) {
+                                
+
+                                $("#SeleccionarPropiedad").append("<option value=" + value.PropiedadCondominioId + ">" + value.PropiedadCodigo + "</option>");
+                            });
+
+                        },
+                        error: function (data) {
+                            debugger;
+                            alert('error');
+                        }
+                    });
+
+                } else {
+
+                }
+
+            });
+
+        });
+    </script>
+}

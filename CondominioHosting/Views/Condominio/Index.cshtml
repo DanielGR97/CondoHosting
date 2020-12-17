@@ -1,0 +1,190 @@
+﻿
+@{
+    ViewBag.Title = "Condominios";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+}
+
+<div id="header">
+    <h3>Condominios</h3>
+
+    <br>
+    <input type="text" id="Buscar"  name="" placeholder="Ingrese el dato a buscar:">
+    <br>
+</div>
+
+<hr>
+
+<table>
+    <tr>
+        <th>Nombre del Condominio</th>
+        <th>Teléfono</th>
+        <th>Descripcion</th>
+        <th>Más</th>
+    </tr>
+    <tbody id="Tabla">
+        @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Ct in ViewBag.listado)
+        {
+
+            <tr>
+                <td>@Ct.CondominioNombre</td>
+                <td>@Ct.CondominioTelefono</td>
+                <td>@Ct.CondominioDescripcion</td>
+
+                <td>
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+
+                        <div class="dropdown-menu">
+                            <a href="#ventana1" data-toggle="modal" class="dropdown-item mod" value="@Ct.CondominioId">Modificar</a>
+                        </div>
+
+                    </div>
+                </td>
+
+            </tr>
+
+
+
+        }
+    </tbody>
+</table>
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Modificar Condominios</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <label>Nombre:</label>
+                    <input id="Nombre" type="text" name="CondominioNombre" class="form-control" maxlength="50" required>
+                    <label>Sector:</label>
+                    <select id="Sector" class="form-control" name="CondominioSectorId">
+                        @foreach (CondominioHosting.Models.SectorTable Sec in ViewBag.sectores)
+                        {
+                            <option value="@Sec.SectorId">@Sec.SectorDescripcion</option>
+                        }
+                    </select>
+                    <label>Dirección:</label>
+                    <textarea id="Direccion" class="form-control" name="CondominioDireccion" required></textarea>
+                    <label>Teléfono:</label>
+                    <input id="Telefono" type="text" name="CondominioTelefono" class="form-control Telefono" required>
+                    <label>Descripción:</label>
+                    <textarea id="Descripcion" class="form-control" name="CondominioDescripcion" required></textarea> <br>
+                    <input id="modificar" type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="ventana3">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>Registrar Condominios</h4>
+                <button tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Condominio/Index">
+
+                    <label>Nombre:</label>
+                    <input type="text" name="CondominioNombre" class="form-control" maxlength="50" required>
+                    <label>Sector:</label>
+                    <select class="form-control" name="CondominioSectorId">
+                        @foreach (CondominioHosting.Models.SectorTable Sec in ViewBag.sectores)
+                        {
+                            <option value="@Sec.SectorId">@Sec.SectorDescripcion</option>
+                        }
+                    </select>
+                    <label>Dirección:</label>
+                    <textarea class="form-control" name="CondominioDireccion" required></textarea>
+                    <label>Teléfono:</label>
+                    <input type="text" name="CondominioTelefono" class="form-control Telefono" required>
+                    <label>Descripción:</label>
+                    <textarea class="form-control" name="CondominioDescripcion" required></textarea> <br>
+                    <input type="hidden" value="@ViewBag.IdPersona" name="CondominioPropietarioId" />
+                    <input type="submit" class="float-right btn btn-success" name="" value="Guardar">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="#ventana3" id="btn-agregar" class="btn btn-success" data-toggle="modal">Agregar</a>
+
+@section script{
+
+    <script>
+
+    $(function ($) {
+
+        $(".Telefono").mask("(999)-999-9999");
+
+    });
+
+    var id;
+    $(document).ready(function () {
+
+
+
+        $(".mod").on("click", function () {
+            id = $(this).attr("value");
+            var data;
+            $.ajax({
+                method: "GET", url: "/Condominio/ObtenerDatos/" + id, data: data,
+                success: function (data) {
+                    debugger;
+                    document.getElementById('Nombre').value = data.nombre;
+                    document.getElementById('Sector').value = data.sector;
+                    document.getElementById('Direccion').value = data.direccion;
+                    document.getElementById('Telefono').value = data.telefono;
+                    document.getElementById('Descripcion').value = data.descripcion;
+                },
+                error: function (data) {
+                    debugger;
+                    alert('error');
+                }
+
+            });
+
+        });
+
+        $("#modificar").on("click", function () {
+            var nombre = document.getElementById('Nombre').value;
+            var sector = document.getElementById('Sector').value;
+            var direccion = document.getElementById('Direccion').value;
+            var telefono = document.getElementById('Telefono').value;
+            var descripcion = document.getElementById('Descripcion').value;
+            var data2 = { "nombre": nombre, "sector": sector, "direccion": direccion, "telefono": telefono,"descripcion": descripcion };
+            $.ajax({ method: "POST", url: "/Condominio/Modificar/" + id, data: data2 });
+        });
+
+        $("#Buscar").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#Tabla tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+    });
+
+   
+    </script>
+}

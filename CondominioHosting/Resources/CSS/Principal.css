@@ -1,0 +1,107 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+}
+#SingIn{
+    position: absolute;
+    right: 50px;
+    top: 40px;
+    color: white;
+}
+#basic{
+  position: relative;
+  top: 77px;
+  left: 150px;
+  height: 500px;
+  width: 298px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: 3px solid black;
+  
+}
+#medium{
+    position: absolute;
+    top: 150px;
+    left: 550px;
+    height: 500px;
+    width: 298px;
+    background-color: rgb(255, 255, 255);;
+    border-radius: 10px;
+    border: 3px solid black;
+}
+
+#premium{
+    position: absolute;
+    top: 150px;
+    right: 215px;
+    height: 500px;
+    width: 298px;
+    background-color: rgb(253, 253, 253);;
+    border-radius: 10px;
+    border: 3px solid black;
+}
+p{
+    text-align: center;
+    color: black;
+   
+}
+
+#coment{
+    position: relative;
+    top: -14px;
+    height: 60px;
+    background-color: rgb(243, 33, 33);
+    text-align: center;
+    
+}
+#coment2{
+    position: relative;
+    top: -14px;
+    height: 60px;
+    background-color: #025aa5;
+    text-align: center;
+    
+}
+#coment3{
+    position: relative;
+    top: -14px;
+    height: 60px;
+    background-color: black;
+    text-align: center;
+    
+}
+#bton{
+    position: relative;
+    top: 100px;
+    left: 88px;
+}
+#bton2{
+    position: relative;
+    top: 80px;
+    left: 88px;
+}
+#bton3{
+    position: relative;
+    top: 40px;
+    left: 88px;
+}
+#parra{
+    color: white;
+    font-size: 16px;
+}
+#titulo{
+    font-size: 28px;
+}
+a{
+    position: absolute;
+    right: 68px;
+    top: 12px;
+
+}
+h4{
+    color: black;
+}
+ul{
+    list-style: none;
+    text-align: center;
+}

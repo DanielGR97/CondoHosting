@@ -1,0 +1,271 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	font-family: calibri;
+}
+
+header{
+	position: fixed;
+	top: 0%;
+	width: 100%;
+	height: 10vh;
+	background-color: #111E60;
+	z-index: 1;
+	color: white;
+	opacity: 60;
+	-webkit-box-shadow: 0 0 20px 2px #303030;
+	box-shadow: 0 0 20px 2px black;
+}
+
+#nombreUsuario{
+    margin-top:50px;
+    left: 500px;
+}
+
+body{
+	background-color: #f2f2f2;
+}
+
+
+#logo{
+	width: 300px;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+}
+	
+#usuario{
+	height: 100%;
+	width: 300px;
+	position: absolute;
+	right: -30px;
+
+}
+
+#usuario p{
+	right: 90px;
+	top: 17px;
+	position: absolute;
+}
+
+#usuario img{
+	border-radius: 100%;
+	height: 40px;
+	width: 40px;
+	position: absolute;
+	right: 40px;
+	top:15px;
+}
+
+#usuario a{
+    right: 92px;
+    top: 35px;
+    position: absolute;
+}
+
+#usuario span{
+    right: 10px;
+	top: 15px;
+	position: absolute;
+}
+
+.principal{
+	margin-top: 10vh;
+
+}
+
+#accordion{
+	position: fixed;
+	margin-top: 5vh;
+
+}
+
+#accordion * {
+	padding-left: 2px;
+}
+
+.side{
+	padding-left: 0px;
+	padding-right: 0px;
+	padding: 0px;
+	height: 90vh;
+	background-color: #111360;
+	-webkit-box-shadow: 0 0 20px 2px #303030;
+	box-shadow: 0 0 20px 2px #303030;
+	background-color: #2E3740;
+	position: fixed;
+	z-index: 0;
+}
+
+
+
+.panel-default{
+	
+	/*border-bottom: 1px solid #ccc;*/
+}
+
+.panel-default div:hover {
+	background-color: #252b31;
+	cursor: pointer;
+}
+
+#accordion i, h5{
+	color: #d6d6d6;
+}
+
+#accordion i{
+	position: relative;
+	top: 3px;
+}
+
+.panel-collapse{
+	background-color: #252b31;
+}
+
+#accordion ul{
+	padding-top: 0px;
+	margin: 0px;
+	background-color: #252b31;
+}
+
+#accordion li{
+	padding: 5px 20px;
+	background-color: #252b31;
+	color: white;
+	border: 0px;
+	font-size: 16px;
+}
+
+#accordion li a{
+    text-decoration: none;
+    color: #d6d6d6;
+}
+
+#accordion h5 a{
+    text-decoration: none;
+    color: #d6d6d6;
+}
+
+.seccion{
+	padding-left: 20vh;
+}
+
+
+footer{
+    float: bottom;
+	height: 5vh;
+	width: 100%;
+	background-color: black;
+
+}
+
+#ventana1{
+	width:100%;
+	font-size: 18px;
+
+}
+
+.modal-form input[type=text]{
+	width: 250px;
+	/*border-radius: 5px;*/
+	/*border: solid 1px grey;*/
+}
+
+th, td {
+		    border-bottom: 1px solid #ddd;
+		    padding: 8px 0px;
+		    margin: 0px;
+		    padding-left: 7px;
+		}		
+
+table{
+	border-collapse: collapse;
+    width: 100%;
+    position: relative;
+}
+
+tr:hover {background-color: #f5f5f5;}
+
+th{
+	text-align: left;
+	font-size: 18px;
+}	
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+#header h3{
+	text-align: center;
+	color: black;
+	margin-top: 10px;
+}
+
+label{
+	font-size: 18px;
+}
+
+#header input{
+	border-radius: 5px;
+	border: solid 1px grey;
+	width: 400px;
+	height: 30px;
+	padding-left: 7px;
+}
+
+section{
+	margin-top: 20px;
+	margin-left: 30px;
+	margin-bottom: 100px;
+	z-index: 1000;
+}
+
+/*td button{
+	width: 30px;
+}
+*/
+
+#contenedor-menu{
+	width: 20%;
+	display: inline-block;
+	display: block;
+	position: relative;
+
+}
+
+#btn-agregar{
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	 
+}
+
+.modal-header h4{
+	color: black;
+	text-align: center;
+}
+
+.modal-body textarea{
+	resize: none;
+}
+
+.panel-default{
+    padding-top:8px;
+    padding-bottom:2px;
+    border-bottom: solid 0.5px #293139;
+}
+
+.side{
+    margin-top: -20px;
+    height:650px;
+}
+
+.MH{
+    margin-top:30px;
+}
+
+.MH2{
+    margin-top:50px;
+}
+
+.Tabla{
+    max-height:150px;
+}

@@ -1,0 +1,1076 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CondominioHosting" Class="DataBaseCodominiumDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=CondominioHosting;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CondominioHostingConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ContratistasVista" Member="ContratistasVistas">
+    <Type Name="ContratistasVista">
+      <Column Name="PersonaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDocumento" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaCorreo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSexoId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRNC" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="PersonaTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRolId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaServicio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaCompañia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaNacionalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaActivo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PersonaContra" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ServicioContratistaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmpleadosVista" Member="EmpleadosVistas">
+    <Type Name="EmpleadosVista">
+      <Column Name="PersonaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDocumento" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaCorreo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSexoId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRNC" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="PersonaTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRolId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaServicio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaCompañia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaNacionalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaActivo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PersonaContra" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaSueldo" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="PersonaFechaEntrada" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GastosVista" Member="GastosVistas">
+    <Type Name="GastosVista">
+      <Column Name="GastoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GastoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="GastoTipoGastoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GastoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="GastoCantidad" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="GastoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="GastoPropiedadId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GastoInstalacionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GastoServicioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TipoGastoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.IngresosVista" Member="IngresosVistas">
+    <Type Name="IngresosVista">
+      <Column Name="IngresoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoTipoIngresoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoCantidad" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoInquilinoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TipoIngresoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InquilinosVista" Member="InquilinosVistas">
+    <Type Name="InquilinosVista">
+      <Column Name="PersonaId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDocumento" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaCorreo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSexoId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRNC" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="PersonaTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRolId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaServicio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaCompañia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaNacionalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaActivo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PersonaContra" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InstalacionesVista" Member="InstalacionesVistas">
+    <Type Name="InstalacionesVista">
+      <Column Name="InstalacionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionCondominioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionHorarioInicial" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionHorarioFinal" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionOcupado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TipoInstalacionDescripcion" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PropiedadesVista" Member="PropiedadesVistas">
+    <Type Name="PropiedadesVista">
+      <Column Name="PropiedadId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadCodigo" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadHabitaciones" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadCondominioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadPrecio" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadInquilinoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PropiedadActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReclamacionesView" Member="ReclamacionesViews">
+    <Type Name="ReclamacionesView">
+      <Column Name="ReclamacionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReclamacionPersonaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReclamacionSolucionado" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="ReclamacionPropiedadId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReclamacionDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="EmpleadoNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ReclamacionNota" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ReclamacionCosto" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="ReclamacionActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadCodigo" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AccesoTable" Member="AccesoTables">
+    <Type Name="AccesoTable">
+      <Column Name="AccesoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccesNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="AccesoTable_DetalleRolTable" Member="DetalleRolTables" ThisKey="AccesoId" OtherKey="AccesoId" Type="DetalleRolTable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CondominioTable" Member="CondominioTables">
+    <Type Name="CondominioTable">
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioDescripcion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CondominioDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioMembresiaId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CondominioSectorId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioPropietarioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CondominioTable_EventoTable" Member="EventoTables" ThisKey="CondominioId" OtherKey="CondominioId" Type="EventoTable" />
+      <Association Name="CondominioTable_GastoTable" Member="GastoTables" ThisKey="CondominioId" OtherKey="CondominioId" Type="GastoTable" />
+      <Association Name="CondominioTable_HistorialTable" Member="HistorialTables" ThisKey="CondominioId" OtherKey="CondominioId" Type="HistorialTable" />
+      <Association Name="CondominioTable_IngresoTable" Member="IngresoTables" ThisKey="CondominioId" OtherKey="CondominioId" Type="IngresoTable" />
+      <Association Name="CondominioTable_InstalacionTable" Member="InstalacionTables" ThisKey="CondominioId" OtherKey="InstalacionCondominioId" Type="InstalacionTable" />
+      <Association Name="CondominioTable_MantenimientoTable" Member="MantenimientoTables" ThisKey="CondominioId" OtherKey="CondominioId" Type="MantenimientoTable" />
+      <Association Name="CondominioTable_PresupuestoTable" Member="PresupuestoTables" ThisKey="CondominioId" OtherKey="PresupuestoCondominioId" Type="PresupuestoTable" />
+      <Association Name="CondominioTable_PropiedadTable" Member="PropiedadTables" ThisKey="CondominioId" OtherKey="PropiedadCondominioId" Type="PropiedadTable" />
+      <Association Name="CondominioTable_ReclamacionTable" Member="ReclamacionTables" ThisKey="CondominioId" OtherKey="ReclamacionCondominioId" Type="ReclamacionTable" />
+      <Association Name="CondominioTable_RolTable" Member="RolTables" ThisKey="CondominioId" OtherKey="CondominioId" Type="RolTable" />
+      <Association Name="CondominioTable_SerConNombreTable" Member="SerConNombreTables" ThisKey="CondominioId" OtherKey="CondominioId" Type="SerConNombreTable" />
+      <Association Name="CondominioTable_ServicioTable" Member="ServicioTables" ThisKey="CondominioId" OtherKey="CondominioId" Type="ServicioTable" />
+      <Association Name="CondominioTable_TipoGastoTable" Member="TipoGastoTables" ThisKey="CondominioId" OtherKey="CondominioId" Type="TipoGastoTable" />
+      <Association Name="CondominioTable_TipoIngresoTable" Member="TipoIngresoTables" ThisKey="CondominioId" OtherKey="CondominioId" Type="TipoIngresoTable" />
+      <Association Name="CondominioTable_TipoPersonaTable" Member="TipoPersonaTables" ThisKey="CondominioId" OtherKey="CondominioId" Type="TipoPersonaTable" />
+      <Association Name="MembresiaTable_CondominioTable" Member="MembresiaTable" ThisKey="CondominioMembresiaId" OtherKey="MembresiaId" Type="MembresiaTable" IsForeignKey="true" />
+      <Association Name="PersonaTable_CondominioTable" Member="PersonaTable" ThisKey="CondominioPropietarioId" OtherKey="PersonaId" Type="PersonaTable" IsForeignKey="true" />
+      <Association Name="SectorTable_CondominioTable" Member="SectorTable" ThisKey="CondominioSectorId" OtherKey="SectorId" Type="SectorTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DetallePresupuestoTable" Member="DetallePresupuestoTables">
+    <Type Name="DetallePresupuestoTable">
+      <Column Name="DetallePresupuestoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PresupuestoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DetallePresupuestoTipoGastoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DetallePresupuestoCosto" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="DetallePresupuestoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="PresupuestoTable_DetallePresupuestoTable" Member="PresupuestoTable" ThisKey="PresupuestoId" OtherKey="PresupuestoId" Type="PresupuestoTable" IsForeignKey="true" />
+      <Association Name="TipoGastoTable_DetallePresupuestoTable" Member="TipoGastoTable" ThisKey="DetallePresupuestoTipoGastoId" OtherKey="TipoGastoId" Type="TipoGastoTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DetalleRolTable" Member="DetalleRolTables">
+    <Type Name="DetalleRolTable">
+      <Column Name="DetalleRolId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RolId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AccesoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="AccesoTable_DetalleRolTable" Member="AccesoTable" ThisKey="AccesoId" OtherKey="AccesoId" Type="AccesoTable" IsForeignKey="true" />
+      <Association Name="RolTable_DetalleRolTable" Member="RolTable" ThisKey="RolId" OtherKey="RolId" Type="RolTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DetalleServicioConTable" Member="DetalleServicioConTables">
+    <Type Name="DetalleServicioConTable">
+      <Column Name="DetalleServicioConId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ServicioContratistaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SerConNombreId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="SerConNombreTable_DetalleServicioConTable" Member="SerConNombreTable" ThisKey="SerConNombreId" OtherKey="SerConNombreId" Type="SerConNombreTable" IsForeignKey="true" />
+      <Association Name="ServicioContratistaTable_DetalleServicioConTable" Member="ServicioContratistaTable" ThisKey="ServicioContratistaId" OtherKey="ServicioContratistaId" Type="ServicioContratistaTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DetalleServicioProId" Member="DetalleServicioProIds">
+    <Type Name="DetalleServicioProId">
+      <Column Name="DetalleServicioId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ServicioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="PropiedadTable_DetalleServicioProId" Member="PropiedadTable" ThisKey="PropiedadId" OtherKey="PropiedadId" Type="PropiedadTable" IsForeignKey="true" />
+      <Association Name="ServicioTable_DetalleServicioProId" Member="ServicioTable" ThisKey="ServicioId" OtherKey="ServicioId" Type="ServicioTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EstadoCivilTable" Member="EstadoCivilTables">
+    <Type Name="EstadoCivilTable">
+      <Column Name="IdEstadoCivil" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EstadoCivilDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="EstadoCivilTable_PersonaTable" Member="PersonaTables" ThisKey="IdEstadoCivil" OtherKey="PersonaCivilId" Type="PersonaTable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EventoTable" Member="EventoTables">
+    <Type Name="EventoTable">
+      <Column Name="EventoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EventoDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="EventoInquilinoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EventoInstalacionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EventoFechaInicial" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EventoFechaFinal" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EventoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CondominioTable_EventoTable" Member="CondominioTable" ThisKey="CondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+      <Association Name="InstalacionTable_EventoTable" Member="InstalacionTable" ThisKey="EventoInstalacionId" OtherKey="InstalacionId" Type="InstalacionTable" IsForeignKey="true" />
+      <Association Name="PersonaTable_EventoTable" Member="PersonaTable" ThisKey="EventoInquilinoId" OtherKey="PersonaId" Type="PersonaTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GastoTable" Member="GastoTables">
+    <Type Name="GastoTable">
+      <Column Name="GastoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GastoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="GastoTipoGastoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GastoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="GastoCantidad" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="GastoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="GastoPropiedadId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GastoInstalacionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GastoServicioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CondominioTable_GastoTable" Member="CondominioTable" ThisKey="CondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+      <Association Name="InstalacionTable_GastoTable" Member="InstalacionTable" ThisKey="GastoInstalacionId" OtherKey="InstalacionId" Type="InstalacionTable" IsForeignKey="true" />
+      <Association Name="PropiedadTable_GastoTable" Member="PropiedadTable" ThisKey="GastoPropiedadId" OtherKey="PropiedadId" Type="PropiedadTable" IsForeignKey="true" />
+      <Association Name="ServicioTable_GastoTable" Member="ServicioTable" ThisKey="GastoServicioId" OtherKey="ServicioId" Type="ServicioTable" IsForeignKey="true" />
+      <Association Name="TipoGastoTable_GastoTable" Member="TipoGastoTable" ThisKey="GastoTipoGastoId" OtherKey="TipoGastoId" Type="TipoGastoTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HistorialAlquiladoTable" Member="HistorialAlquiladoTables">
+    <Type Name="HistorialAlquiladoTable">
+      <Column Name="HistorialAlquiladoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HistorialAlquiladoInquilinoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HistorialAlquiladoPropiedadId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HistorialAlquiladoFechaAlquiler" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="HistorialAlquiladoFechaTerminacion" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="HistorialAlquiladoAbogadoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="PersonaTable_HistorialAlquiladoTable" Member="PersonaTable" ThisKey="HistorialAlquiladoInquilinoId" OtherKey="PersonaId" Type="PersonaTable" IsForeignKey="true" />
+      <Association Name="PersonaTable_HistorialAlquiladoTable1" Member="PersonaTable1" ThisKey="HistorialAlquiladoAbogadoId" OtherKey="PersonaId" Type="PersonaTable" IsForeignKey="true" />
+      <Association Name="PropiedadTable_HistorialAlquiladoTable" Member="PropiedadTable" ThisKey="HistorialAlquiladoPropiedadId" OtherKey="PropiedadId" Type="PropiedadTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HistorialTable" Member="HistorialTables">
+    <Type Name="HistorialTable">
+      <Column Name="HistorialId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HistorialDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="HistorialFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="HistorialCosto" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="HistorialContratistaId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HistorialEmpleadoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HistorialReclamacionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CondominioTable_HistorialTable" Member="CondominioTable" ThisKey="CondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+      <Association Name="PersonaTable_HistorialTable" Member="PersonaTable" ThisKey="HistorialContratistaId" OtherKey="PersonaId" Type="PersonaTable" IsForeignKey="true" />
+      <Association Name="PersonaTable_HistorialTable1" Member="PersonaTable1" ThisKey="HistorialEmpleadoId" OtherKey="PersonaId" Type="PersonaTable" IsForeignKey="true" />
+      <Association Name="ReclamacionTable_HistorialTable" Member="ReclamacionTable" ThisKey="HistorialReclamacionId" OtherKey="ReclamacionId" Type="ReclamacionTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.IngresoTable" Member="IngresoTables">
+    <Type Name="IngresoTable">
+      <Column Name="IngresoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IngresoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoTipoIngresoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoCantidad" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoInquilinoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CondominioTable_IngresoTable" Member="CondominioTable" ThisKey="CondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+      <Association Name="PersonaTable_IngresoTable" Member="PersonaTable" ThisKey="IngresoInquilinoId" OtherKey="PersonaId" Type="PersonaTable" IsForeignKey="true" />
+      <Association Name="TipoIngresoTable_IngresoTable" Member="TipoIngresoTable" ThisKey="IngresoTipoIngresoId" OtherKey="TipoIngresoId" Type="TipoIngresoTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InstalacionTable" Member="InstalacionTables">
+    <Type Name="InstalacionTable">
+      <Column Name="InstalacionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InstalacionTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionCondominioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionHorarioInicial" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionHorarioFinal" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionOcupado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="InstalacionTable_EventoTable" Member="EventoTables" ThisKey="InstalacionId" OtherKey="EventoInstalacionId" Type="EventoTable" />
+      <Association Name="InstalacionTable_GastoTable" Member="GastoTables" ThisKey="InstalacionId" OtherKey="GastoInstalacionId" Type="GastoTable" />
+      <Association Name="InstalacionTable_MantenimientoTable" Member="MantenimientoTables" ThisKey="InstalacionId" OtherKey="MantenInstalacionId" Type="MantenimientoTable" />
+      <Association Name="CondominioTable_InstalacionTable" Member="CondominioTable" ThisKey="InstalacionCondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+      <Association Name="TipoInstalacionTable_InstalacionTable" Member="TipoInstalacionTable" ThisKey="InstalacionTipoId" OtherKey="TipoInstalacionId" Type="TipoInstalacionTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MantenimientoTable" Member="MantenimientoTables">
+    <Type Name="MantenimientoTable">
+      <Column Name="MantenimientoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MantenPersonaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MantenimientoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MantenimientoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MantenInstalacionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MantenPropiedadId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CondominioTable_MantenimientoTable" Member="CondominioTable" ThisKey="CondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+      <Association Name="InstalacionTable_MantenimientoTable" Member="InstalacionTable" ThisKey="MantenInstalacionId" OtherKey="InstalacionId" Type="InstalacionTable" IsForeignKey="true" />
+      <Association Name="PersonaTable_MantenimientoTable" Member="PersonaTable" ThisKey="MantenPersonaId" OtherKey="PersonaId" Type="PersonaTable" IsForeignKey="true" />
+      <Association Name="PropiedadTable_MantenimientoTable" Member="PropiedadTable" ThisKey="MantenPropiedadId" OtherKey="PropiedadId" Type="PropiedadTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MembresiaTable" Member="MembresiaTables">
+    <Type Name="MembresiaTable">
+      <Column Name="MembresiaId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MembresiaNombre" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="MembresiaDescripcion" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="MembresiaPrecio" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="MembresiaCantidadUsuarios" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MembresiaActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="MembresiaTable_CondominioTable" Member="CondominioTables" ThisKey="MembresiaId" OtherKey="CondominioMembresiaId" Type="CondominioTable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NacionalidadTable" Member="NacionalidadTables">
+    <Type Name="NacionalidadTable">
+      <Column Name="NacionalidadId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NacionalidadNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="NacionalidadTable_PersonaTable" Member="PersonaTables" ThisKey="NacionalidadId" OtherKey="PersonaNacionalidad" Type="PersonaTable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PersonaTable" Member="PersonaTables">
+    <Type Name="PersonaTable">
+      <Column Name="PersonaId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDocumento" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaCorreo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSexoId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaFechaNacimiento" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PersonaDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRNC" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="PersonaTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRolId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaServicio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaCompañia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaNacionalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaActivo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PersonaContra" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSueldo" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="PersonaFechaEntrada" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PersonaCondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaCivilId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaReferidoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="PersonaTable_CondominioTable" Member="CondominioTables" ThisKey="PersonaId" OtherKey="CondominioPropietarioId" Type="CondominioTable" />
+      <Association Name="PersonaTable_EventoTable" Member="EventoTables" ThisKey="PersonaId" OtherKey="EventoInquilinoId" Type="EventoTable" />
+      <Association Name="PersonaTable_HistorialAlquiladoTable" Member="HistorialAlquiladoTables" ThisKey="PersonaId" OtherKey="HistorialAlquiladoInquilinoId" Type="HistorialAlquiladoTable" />
+      <Association Name="PersonaTable_HistorialAlquiladoTable1" Member="HistorialAlquiladoTables1" ThisKey="PersonaId" OtherKey="HistorialAlquiladoAbogadoId" Type="HistorialAlquiladoTable" />
+      <Association Name="PersonaTable_HistorialTable" Member="HistorialTables" ThisKey="PersonaId" OtherKey="HistorialContratistaId" Type="HistorialTable" />
+      <Association Name="PersonaTable_HistorialTable1" Member="HistorialTables1" ThisKey="PersonaId" OtherKey="HistorialEmpleadoId" Type="HistorialTable" />
+      <Association Name="PersonaTable_IngresoTable" Member="IngresoTables" ThisKey="PersonaId" OtherKey="IngresoInquilinoId" Type="IngresoTable" />
+      <Association Name="PersonaTable_MantenimientoTable" Member="MantenimientoTables" ThisKey="PersonaId" OtherKey="MantenPersonaId" Type="MantenimientoTable" />
+      <Association Name="PersonaTable_PersonaTable" Member="PersonaTables" ThisKey="PersonaId" OtherKey="PersonaReferidoId" Type="PersonaTable" />
+      <Association Name="PersonaTable_PropiedadTable" Member="PropiedadTables" ThisKey="PersonaId" OtherKey="PropiedadInquilinoId" Type="PropiedadTable" />
+      <Association Name="PersonaTable_ReclamacionTable" Member="ReclamacionTables" ThisKey="PersonaId" OtherKey="ReclamacionPersonaId" Type="ReclamacionTable" />
+      <Association Name="PersonaTable_ReclamacionTable1" Member="ReclamacionTables1" ThisKey="PersonaId" OtherKey="ReclamacionEmpleadoId" Type="ReclamacionTable" />
+      <Association Name="EstadoCivilTable_PersonaTable" Member="EstadoCivilTable" ThisKey="PersonaCivilId" OtherKey="IdEstadoCivil" Type="EstadoCivilTable" IsForeignKey="true" />
+      <Association Name="NacionalidadTable_PersonaTable" Member="NacionalidadTable" ThisKey="PersonaNacionalidad" OtherKey="NacionalidadId" Type="NacionalidadTable" IsForeignKey="true" />
+      <Association Name="PersonaTable_PersonaTable" Member="PersonaTable1" ThisKey="PersonaReferidoId" OtherKey="PersonaId" Type="PersonaTable" IsForeignKey="true" />
+      <Association Name="RolTable_PersonaTable" Member="RolTable" ThisKey="PersonaRolId" OtherKey="RolId" Type="RolTable" IsForeignKey="true" />
+      <Association Name="ServicioContratistaTable_PersonaTable" Member="ServicioContratistaTable" ThisKey="PersonaServicio" OtherKey="ServicioContratistaId" Type="ServicioContratistaTable" IsForeignKey="true" />
+      <Association Name="SexoTable_PersonaTable" Member="SexoTable" ThisKey="PersonaSexoId" OtherKey="SexoId" Type="SexoTable" IsForeignKey="true" />
+      <Association Name="TipoPersonaTable_PersonaTable" Member="TipoPersonaTable" ThisKey="PersonaTipoId" OtherKey="TipoPersonaId" Type="TipoPersonaTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PresupuestoTable" Member="PresupuestoTables">
+    <Type Name="PresupuestoTable">
+      <Column Name="PresupuestoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PresupuestoCondominioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PresupuestoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="PresupuestoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="PresupuestoTable_DetallePresupuestoTable" Member="DetallePresupuestoTables" ThisKey="PresupuestoId" OtherKey="PresupuestoId" Type="DetallePresupuestoTable" />
+      <Association Name="CondominioTable_PresupuestoTable" Member="CondominioTable" ThisKey="PresupuestoCondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PropiedadTable" Member="PropiedadTables">
+    <Type Name="PropiedadTable">
+      <Column Name="PropiedadId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PropiedadCodigo" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadHabitaciones" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadCondominioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadPrecio" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadInquilinoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PropiedadActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadBanos" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="PropiedadTerraza" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="PropiedadTable_DetalleServicioProId" Member="DetalleServicioProIds" ThisKey="PropiedadId" OtherKey="PropiedadId" Type="DetalleServicioProId" />
+      <Association Name="PropiedadTable_GastoTable" Member="GastoTables" ThisKey="PropiedadId" OtherKey="GastoPropiedadId" Type="GastoTable" />
+      <Association Name="PropiedadTable_HistorialAlquiladoTable" Member="HistorialAlquiladoTables" ThisKey="PropiedadId" OtherKey="HistorialAlquiladoPropiedadId" Type="HistorialAlquiladoTable" />
+      <Association Name="PropiedadTable_MantenimientoTable" Member="MantenimientoTables" ThisKey="PropiedadId" OtherKey="MantenPropiedadId" Type="MantenimientoTable" />
+      <Association Name="PropiedadTable_ReclamacionTable" Member="ReclamacionTables" ThisKey="PropiedadId" OtherKey="ReclamacionPropiedadId" Type="ReclamacionTable" />
+      <Association Name="CondominioTable_PropiedadTable" Member="CondominioTable" ThisKey="PropiedadCondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+      <Association Name="PersonaTable_PropiedadTable" Member="PersonaTable" ThisKey="PropiedadInquilinoId" OtherKey="PersonaId" Type="PersonaTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReclamacionTable" Member="ReclamacionTables">
+    <Type Name="ReclamacionTable">
+      <Column Name="ReclamacionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ReclamacionPersonaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReclamacionSolucionado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ReclamacionPropiedadId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReclamacionDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ReclamacionEmpleadoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReclamacionNota" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ReclamacionCosto" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="ReclamacionActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ReclamacionFechaCreacion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ReclamacionFechaSolucionada" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ReclamacionTipoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReclamacionCondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ReclamacionTable_HistorialTable" Member="HistorialTables" ThisKey="ReclamacionId" OtherKey="HistorialReclamacionId" Type="HistorialTable" />
+      <Association Name="CondominioTable_ReclamacionTable" Member="CondominioTable" ThisKey="ReclamacionCondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+      <Association Name="PersonaTable_ReclamacionTable" Member="PersonaTable" ThisKey="ReclamacionPersonaId" OtherKey="PersonaId" Type="PersonaTable" IsForeignKey="true" />
+      <Association Name="PersonaTable_ReclamacionTable1" Member="PersonaTable1" ThisKey="ReclamacionEmpleadoId" OtherKey="PersonaId" Type="PersonaTable" IsForeignKey="true" />
+      <Association Name="PropiedadTable_ReclamacionTable" Member="PropiedadTable" ThisKey="ReclamacionPropiedadId" OtherKey="PropiedadId" Type="PropiedadTable" IsForeignKey="true" />
+      <Association Name="TipoReclamacionTable_ReclamacionTable" Member="TipoReclamacionTable" ThisKey="ReclamacionTipoId" OtherKey="TipoReclamacionId" Type="TipoReclamacionTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RolTable" Member="RolTables">
+    <Type Name="RolTable">
+      <Column Name="RolId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="RolTable_DetalleRolTable" Member="DetalleRolTables" ThisKey="RolId" OtherKey="RolId" Type="DetalleRolTable" />
+      <Association Name="RolTable_PersonaTable" Member="PersonaTables" ThisKey="RolId" OtherKey="PersonaRolId" Type="PersonaTable" />
+      <Association Name="CondominioTable_RolTable" Member="CondominioTable" ThisKey="CondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SectorTable" Member="SectorTables">
+    <Type Name="SectorTable">
+      <Column Name="SectorId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SectorDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="SectorTable_CondominioTable" Member="CondominioTables" ThisKey="SectorId" OtherKey="CondominioSectorId" Type="CondominioTable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SerConNombreTable" Member="SerConNombreTables">
+    <Type Name="SerConNombreTable">
+      <Column Name="SerConNombreId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SerConNombreDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SerConNombreTable_DetalleServicioConTable" Member="DetalleServicioConTables" ThisKey="SerConNombreId" OtherKey="SerConNombreId" Type="DetalleServicioConTable" />
+      <Association Name="CondominioTable_SerConNombreTable" Member="CondominioTable" ThisKey="CondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ServicioContratistaTable" Member="ServicioContratistaTables">
+    <Type Name="ServicioContratistaTable">
+      <Column Name="ServicioContratistaId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ServicioContratistaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="ServicioContratistaTable_DetalleServicioConTable" Member="DetalleServicioConTables" ThisKey="ServicioContratistaId" OtherKey="ServicioContratistaId" Type="DetalleServicioConTable" />
+      <Association Name="ServicioContratistaTable_PersonaTable" Member="PersonaTables" ThisKey="ServicioContratistaId" OtherKey="PersonaServicio" Type="PersonaTable" />
+      <Association Name="ServicioContratistaTable_ServicioContratistaTable" Member="ServicioContratistaTable2" ThisKey="ServicioContratistaId" OtherKey="ServicioContratistaId" Type="ServicioContratistaTable" Cardinality="One" />
+      <Association Name="ServicioContratistaTable_ServicioContratistaTable" Member="ServicioContratistaTable1" ThisKey="ServicioContratistaId" OtherKey="ServicioContratistaId" Type="ServicioContratistaTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ServicioPropiedadTable" Member="ServicioPropiedadTables">
+    <Type Name="ServicioPropiedadTable">
+      <Column Name="IdServicioPropiedad" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdServicio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdPropiedad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ServicioTable" Member="ServicioTables">
+    <Type Name="ServicioTable">
+      <Column Name="ServicioId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ServicioDescripcion" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ServicioGasto" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="ServicioTable_DetalleServicioProId" Member="DetalleServicioProIds" ThisKey="ServicioId" OtherKey="ServicioId" Type="DetalleServicioProId" />
+      <Association Name="ServicioTable_GastoTable" Member="GastoTables" ThisKey="ServicioId" OtherKey="GastoServicioId" Type="GastoTable" />
+      <Association Name="CondominioTable_ServicioTable" Member="CondominioTable" ThisKey="CondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SexoTable" Member="SexoTables">
+    <Type Name="SexoTable">
+      <Column Name="SexoId" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SexoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="SexoTable_PersonaTable" Member="PersonaTables" ThisKey="SexoId" OtherKey="PersonaSexoId" Type="PersonaTable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TipoGastoTable" Member="TipoGastoTables">
+    <Type Name="TipoGastoTable">
+      <Column Name="TipoGastoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TipoGastoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TipoGastoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TipoGastoFijo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TipoGastoTable_DetallePresupuestoTable" Member="DetallePresupuestoTables" ThisKey="TipoGastoId" OtherKey="DetallePresupuestoTipoGastoId" Type="DetallePresupuestoTable" />
+      <Association Name="TipoGastoTable_GastoTable" Member="GastoTables" ThisKey="TipoGastoId" OtherKey="GastoTipoGastoId" Type="GastoTable" />
+      <Association Name="CondominioTable_TipoGastoTable" Member="CondominioTable" ThisKey="CondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TipoIngresoTable" Member="TipoIngresoTables">
+    <Type Name="TipoIngresoTable">
+      <Column Name="TipoIngresoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TipoIngresoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TipoIngresoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TipoIngresoTable_IngresoTable" Member="IngresoTables" ThisKey="TipoIngresoId" OtherKey="IngresoTipoIngresoId" Type="IngresoTable" />
+      <Association Name="CondominioTable_TipoIngresoTable" Member="CondominioTable" ThisKey="CondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TipoInstalacionTable" Member="TipoInstalacionTables">
+    <Type Name="TipoInstalacionTable">
+      <Column Name="TipoInstalacionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TipoInstalacionDescripcion" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="TipoInstalacionTable_InstalacionTable" Member="InstalacionTables" ThisKey="TipoInstalacionId" OtherKey="InstalacionTipoId" Type="InstalacionTable" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TipoPersonaTable" Member="TipoPersonaTables">
+    <Type Name="TipoPersonaTable">
+      <Column Name="TipoPersonaId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TipoPersonaDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TipoPersonaTable_PersonaTable" Member="PersonaTables" ThisKey="TipoPersonaId" OtherKey="PersonaTipoId" Type="PersonaTable" />
+      <Association Name="CondominioTable_TipoPersonaTable" Member="CondominioTable" ThisKey="CondominioId" OtherKey="CondominioId" Type="CondominioTable" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TipoReclamacionTable" Member="TipoReclamacionTables">
+    <Type Name="TipoReclamacionTable">
+      <Column Name="TipoReclamacionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TipoReclamacionDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="TipoReclamacionTable_ReclamacionTable" Member="ReclamacionTables" ThisKey="TipoReclamacionId" OtherKey="ReclamacionTipoId" Type="ReclamacionTable" />
+    </Type>
+  </Table>
+  <Function Name="dbo.BuscarGastos" Method="BuscarGastos">
+    <Parameter Name="fechaIn" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="fechaLim" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="condominio" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BuscarGastosResult">
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GastoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TipoGastoDescripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GastoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="GastoCantidad" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BuscarIngresos" Method="BuscarIngresos">
+    <Parameter Name="fechaini" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="fechaFin" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="condominio" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BuscarIngresosResult">
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IngresoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TipoIngresoDescripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IngresoCantidad" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EstadoIngreso" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoCantidad1" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BuscartipoGastos" Method="BuscartipoGastos">
+    <Parameter Name="condominio" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fechaIni" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="fechaFin" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="BuscartipoGastosResult">
+      <Column Name="GastoTipoGastoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TipoGastoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GastoFijo" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalGastos" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BuscarTipoIngresos" Method="BuscarTipoIngresos">
+    <Parameter Name="condominio" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fechaIni" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="fechaFin" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="BuscarTipoIngresosResult">
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TipoIngresoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalIngresos" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="TipoIngresoActivo" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaCondominioProc" Method="BusquedaCondominioProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaCondominioProcResult">
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioDescripcion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CondominioDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioMembresiaId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CondominioSectorId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioPropietarioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SectorDescripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaContratistaProc" Method="BusquedaContratistaProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaContratistaProcResult">
+      <Column Name="PersonaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDocumento" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaCorreo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSexoId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRNC" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="PersonaTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRolId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaServicio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaCompañia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaNacionalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaActivo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PersonaContra" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ServicioContratistaNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaEmpleadoProc" Method="BusquedaEmpleadoProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaEmpleadoProcResult">
+      <Column Name="PersonaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDocumento" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaCorreo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSexoId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRNC" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="PersonaTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRolId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaServicio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaCompañia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaNacionalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaActivo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PersonaContra" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSueldo" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="PersonaFechaEntrada" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PersonaCondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaEventoProc" Method="BusquedaEventoProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaEventoProcResult">
+      <Column Name="EventoFechaInicial" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EventoFechaFinal" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EventoDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaGastoProc" Method="BusquedaGastoProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaGastoProcResult">
+      <Column Name="GastoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GastoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="GastoTipoGastoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GastoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="GastoCantidad" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="GastoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="GastoPropiedadId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GastoInstalacionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GastoServicioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TipoGastoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaIngresoProc" Method="BusquedaIngresoProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaIngresoProcResult">
+      <Column Name="IngresoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoTipoIngresoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoCantidad" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TipoIngresoDescripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaIngresosRentaProc" Method="BusquedaIngresosRentaProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Fecha" Parameter="fecha" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="BusquedaIngresosRentaProcResult">
+      <Column Name="IngresoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoTipoIngresoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoCantidad" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="IngresoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TipoIngresoDescripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaApellido" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaInquilinoProc" Method="BusquedaInquilinoProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaInquilinoProcResult">
+      <Column Name="PersonaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDocumento" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaCorreo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSexoId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRNC" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="PersonaTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRolId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaServicio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaCompañia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaNacionalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaActivo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PersonaContra" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaInquilinoProProc" Method="BusquedaInquilinoProProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaInquilinoProProcResult">
+      <Column Name="PersonaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDocumento" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaCorreo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSexoId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRNC" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="PersonaTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRolId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaServicio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaCompañia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaNacionalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaActivo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PersonaContra" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaCondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaInstalacionProc" Method="BusquedaInstalacionProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaInstalacionProcResult">
+      <Column Name="InstalacionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionCondominioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionHorarioInicial" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionHorarioFinal" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionOcupado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="InstalacionActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TipoInstalacionDescripcion" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaMantenimientoProc" Method="BusquedaMantenimientoProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaMantenimientoProcResult">
+      <Column Name="MantenimientoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MantenimientoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="MantenimientoActivo" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaApellido" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PropiedadCodigo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="InstalacionDescripcion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaPresupuestoProc" Method="BusquedaPresupuestoProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaPresupuestoProcResult">
+      <Column Name="PresupuestoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PresupuestoFecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaPropiedadProc" Method="BusquedaPropiedadProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaPropiedadProcResult">
+      <Column Name="PropiedadId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadCodigo" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadHabitaciones" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadCondominioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadPrecio" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadInquilinoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PropiedadActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadBanos" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="PropiedadTerraza" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadDisponible" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaReclamacionProc" Method="BusquedaReclamacionProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaReclamacionProcResult">
+      <Column Name="ReclamacionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PropiedadCodigo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ReclamacionDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ReclamacionNota" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ReclamacionCosto" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TipoReclamacionDescripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ReclamacionEmpleadoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReclamacionTipoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaRolEmProc" Method="BusquedaRolEmProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaRolEmProcResult">
+      <Column Name="RolId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaRolProc" Method="BusquedaRolProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaRolProcResult">
+      <Column Name="RolId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaServicioProProc" Method="BusquedaServicioProProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaServicioProProcResult">
+      <Column Name="ServicioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ServicioDescripcion" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ServicioGasto" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaTipoGastoProc" Method="BusquedaTipoGastoProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaTipoGastoProcResult">
+      <Column Name="TipoGastoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TipoGastoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TipoGastoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TipoGastoFijoB" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="TipoGastoFijo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.BusquedaTipoIngresoProc" Method="BusquedaTipoIngresoProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="BusquedaTipoIngresoProcResult">
+      <Column Name="TipoIngresoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TipoIngresoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TipoIngresoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ComboBoxEmpleadoContratistaProc" Method="ComboBoxEmpleadoContratistaProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ComboBoxEmpleadoContratistaProcResult">
+      <Column Name="PersonaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDocumento" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaCorreo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSexoId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRNC" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="PersonaTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRolId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaServicio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaCompañia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaNacionalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaActivo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PersonaContra" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSueldo" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="PersonaFechaEntrada" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PersonaCondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ComboBoxPropiedadDisponibleProc" Method="ComboBoxPropiedadDisponibleProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ComboBoxPropiedadDisponibleProcResult">
+      <Column Name="PropiedadId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadCodigo" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadHabitaciones" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadCondominioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadPrecio" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadInquilinoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PropiedadActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadBanos" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="PropiedadTerraza" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadDisponible" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ComboBoxPropiedadNoDisponibleProc" Method="ComboBoxPropiedadNoDisponibleProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fecha" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="ComboBoxPropiedadNoDisponibleProcResult">
+      <Column Name="PropiedadId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadCodigo" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadHabitaciones" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadCondominioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadDescripcion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadPrecio" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadInquilinoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PropiedadActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadBanos" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="PropiedadTerraza" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PropiedadDisponible" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ComboBoxReferidosProc" Method="ComboBoxReferidosProc">
+    <Parameter Name="PersonaId" Parameter="personaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PersonaTipoId" Parameter="personaTipoId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ComboBoxReferidosProcResult">
+      <Column Name="PersonaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDocumento" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaCorreo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSexoId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRNC" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="PersonaTipoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaRolId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaServicio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaCompañia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaNacionalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonaActivo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PersonaContra" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaSueldo" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="PersonaFechaEntrada" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PersonaCondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ComboBoxTipoGastoProc" Method="ComboBoxTipoGastoProc">
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ComboBoxTipoGastoProcResult">
+      <Column Name="TipoGastoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TipoGastoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TipoGastoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ComboBoxTipoIngresoProc" Method="ComboBoxTipoIngresoProc">
+    <Parameter Name="CondominioId" Parameter="condominioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ComboBoxTipoIngresoProcResult">
+      <Column Name="TipoIngresoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TipoIngresoDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TipoIngresoActivo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.contratistasActivos" Method="contratistasActivos">
+    <Parameter Name="type" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="condominio" Type="System.Int32" DbType="Int" />
+    <ElementType Name="contratistasActivosResult">
+      <Column Name="NombreCompleto" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaCompañia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonaRNC" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="ServicioContratistaNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EstadoContratista" Type="System.String" DbType="VarChar(17) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.EmpleadosActivos" Method="EmpleadosActivos">
+    <Parameter Name="laborando" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="condominio" Type="System.Int32" DbType="Int" />
+    <ElementType Name="EmpleadosActivosResult">
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDocumento" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaDireccion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaTelefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="EstadoEmpleado" Type="System.String" DbType="VarChar(11) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.InquilinosCondominio" Method="InquilinosCondominio">
+    <Parameter Name="viviendo" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="condominio" Type="System.Int32" DbType="Int" />
+    <ElementType Name="InquilinosCondominioResult">
+      <Column Name="NombreInquilino" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaFechaEntrada" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PropiedadCodigo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="InquilinosCondominio" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.PropiedadesAlquiladas" Method="PropiedadesAlquiladas">
+    <Parameter Name="alquilada" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="condominio" Type="System.Int32" DbType="Int" />
+    <ElementType Name="PropiedadesAlquiladasResult">
+      <Column Name="PropiedadCodigo" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="CondominioNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonaNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EstadoPropiedad" Type="System.String" DbType="VarChar(9) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

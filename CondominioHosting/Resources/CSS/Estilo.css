@@ -1,0 +1,113 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+
+body{
+	background-color: #f4f2f2;
+}
+
+header{
+	position: fixed;
+	width: 100%;
+	z-index: 1;
+	background-color: #222222;
+}
+
+#arriba{
+	margin-top: 80px;
+}
+
+nav{
+	position: fixed;
+	width: 100%;
+	height: 8vh;
+	/*background-color: #111E60;*/
+	z-index: 1;
+	color: white;
+	opacity: 60;
+	-webkit-box-shadow: 0 0 20px 2px #303030;
+	box-shadow: 0 0 20px 2px black;
+	right: 0px;
+	/*margin-top: 5%;*/
+}
+
+ul{
+	width: 100%;
+	margin-left: 33%;
+}
+
+
+li{
+	display: inline-block;
+	color: white;
+	font-size: 16px;
+	margin-right: 40px;
+	margin-top:1.5%;
+
+}
+
+li a{
+	color: white;
+}
+aside{
+	position: fixed;
+	background-color: #111E60;
+	/*margin-top: 53px;*/
+	width: 22%;
+	height: 100%;
+	right: 0px;
+	color: white;
+	padding: 7px;
+	padding-top: 70px;
+	-webkit-box-shadow: 20px 0 0px 2px #303030;
+	box-shadow: 0 0 10px 2px black;
+}
+
+input{
+	margin-bottom: 20px;
+	width: 80%;
+	margin-top: 10px;
+}
+aside h3{
+	text-align: center;
+	text-decoration-line: underline;
+}
+
+aside input[type=submit]{
+	width: 100px;
+}
+
+aside label{
+	margin-left: 0px;
+	font-size: 16px;
+}
+#cuerpo{
+	width: 78%;
+	padding: 15px;
+}
+
+#cuerpo h3{
+	text-align: center;
+	text-decoration-line: underline;
+}
+#cuerpo p{
+	font-family: sans-serif;
+	font-size: 16px;
+	width: 80%;
+	text-align: center;
+	margin-left: 10%;
+	margin-bottom: 3%;
+}
+
+#Registro input[type=submit]{
+	width: 100px;
+	margin-top: 20px;
+	margin-left: 10px;
+
+}
+
+input[type=button]{
+	width: 100px;
+}

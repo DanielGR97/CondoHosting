@@ -1,0 +1,231 @@
+﻿@{
+    ViewBag.Title = "Eventos";
+    Layout = "~/Views/Share/_BaseLayout.cshtml";
+}
+
+@section user{
+    <p>
+        @ViewBag.UsuarioNombre
+    </p>
+    @if (!User.IsInRole("Admin"))
+    {
+        <span>
+            @ViewBag.CondominioNombre
+        </span>
+    }
+}
+
+<h2>Calendario para eventos</h2>
+
+<div id="calendar" style="z-index: 0;"></div>
+<a href="#ventana2" id="btn-agregar" class="btn btn-success" data-toggle="modal">Add Event..</a>
+
+@section css{
+    <link href="~/Resources/CSS/fullcalendar.min.css" rel="stylesheet" />
+    <link href="~/Resources/CSS/fullcalendar.print.min.css" rel="stylesheet" media="print" />
+}
+
+
+@section Script{
+
+    <script src="~/Resources/JS/jquery.min.js"></script>
+    <script src="~/Resources/JS/moment.min.js"></script>
+    <script src="~/Resources/JS/fullcalendar.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#Condominio').on("change", function (e) {
+                $('#SelectInquilino option').remove();
+                $('#SelectInstalacion option').remove();
+                var IdCondominio = $('#Condominio').val();
+                if (IdCondominio > 0) {
+                    var datos = { "condominio": IdCondominio };
+                    $.ajax({
+                        type: "GET",
+                        url: "/Evento/CambiarCombo/",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: datos,
+                        success: function (data) {
+                            debugger;
+                            if (data != null)
+
+                            $.each(data, function (key, value) {
+
+                                $("#SelectInquilino").append("<option value=" + value.PersonaId + ">" + value.PersonaNombre + "</option>");
+                            });
+
+                        },
+                        error: function (data) {
+                            debugger;
+                            alert('error');
+                        }
+                    });
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Evento/CambiarCombo2/",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: datos,
+                        success: function (data) {
+                            debugger;
+
+                            $.each(data, function (key, value) {
+
+                                $("#SelectInstalacion").append("<option value=" + value.InstalacionId + ">" + value.InstalacionDescripcion + "</option>");
+                            });
+
+                        },
+                        error: function (data) {
+                            debugger;
+                            alert('error');
+                        }
+                    });
+                } else {
+
+                }
+
+            });
+
+
+            $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listWeek'
+            },
+            defaultDate: new Date(),
+            editable: false,
+            navLinks: true, // can click day/week names to navigate views
+            eventLimit: true,
+            selectable: true,
+
+            event:
+                {
+                },
+            
+            DayClick: function (event, jsEvent, view) {
+
+                $('#calendar').fullCalendar('removeEvents', event.id);
+
+            }
+            
+        });
+            $.getJSON("/evento/getevents", function (data) {
+                $("#calendar").fullCalendar("renderEvents", data, true);
+               
+            });
+
+
+
+        //$("#calendar").fullCalendar({ events: [{ start: '2018-03-07', end: '2018-03-08', title: 'test' }] });
+
+        });
+
+    </script>
+
+}
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ventana2">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar Evento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Evento/Index" method="post">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <label>Condominio:</label>
+                        <select class="form-control" id="Condominio" name="CondominioId">
+                            @foreach (CondominioHosting.Models.BusquedaCondominioProcResult Ct in ViewBag.condominio)
+                            {
+                                <option value="@Ct.CondominioId">@Ct.CondominioNombre</option>
+                            }
+                        </select>
+                    }
+                    @if (User.IsInRole("Eventos"))
+                    {
+                        <input type="hidden" name="CondominioId" value="@ViewBag.CondominioId" />
+                    }
+                    <label>Título del Evento:</label>
+                    <input type="text" class="form-control" name="EventoDescripcion" required /><br />
+                    <label>Nombre del Inquilino</label>
+                    <select class="form-control" name="EventoInquilinoId" id="SelectInquilino">
+                        @foreach (CondominioHosting.Models.BusquedaInquilinoProcResult per in ViewBag.inqui)
+                        {
+                            <option value="@per.PersonaId">@per.PersonaNombre @per.PersonaApellido</option>
+                        }
+                    </select><br />
+                    <label>Instalación:</label>
+                    <select class="form-control" name="EventoInstalacionId" id="SelectInstalacion">
+                        @foreach (CondominioHosting.Models.BusquedaInstalacionProcResult insta in ViewBag.insta)
+                        {
+                            <option value="@insta.InstalacionId">@insta.InstalacionDescripcion</option>
+                        }
+                    </select><br />
+                    <input type="hidden" value="true" name="EventoActivo"/>
+                    <label>Fecha Inicial:</label>
+                    <input type="datetime-local" class="form-control" name="EventoFechaInicial" value="@DateTime.Now"/><br />
+                    <label>Fecha Final:</label>
+                    <input type="datetime-local" class="form-control" name="EventoFechaFinal" /><br />
+                    <input type="submit" class="float-right btn btn-success" name="" value="Guardar Evento">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="calendar"></div>
+<a href="#ventana2" id="btn-agregar" class="btn btn-success" data-toggle="modal">Add Event..</a>
+
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ventana2">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Evento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Evento/Index" method="post">
+                    
+                    <label>Titulo del Evento</label>
+                    <input type="text" class="form-control" name="EventoDescripcion" /><br />
+                    <label>Nombre del Inquilino</label>
+                    <select class="form-control" name="EventoInquilinoId">
+                        @foreach (CondominioHosting.Models.BusquedaInquilinoProcResult per in ViewBag.inqui)
+                        {
+                            <option value="@per.PersonaId">@per.PersonaNombre @per.PersonaApellido</option>
+                        }
+                    </select><br />
+                    <label>Instalaciòn</label>
+                    <select class="form-control" name="EventoInstalacionId">
+                        @foreach (CondominioHosting.Models.BusquedaInstalacionProcResult insta in ViewBag.insta)
+                        {
+                            <option value="@insta.InstalacionId">@insta.InstalacionDescripcion</option>
+                        }
+                    </select><br />
+                    <input type="hidden" value="true" name="EventoActivo"/>
+                    <label>Fecha Inicial</label>
+                    <input type="datetime-local" class="form-control" name="EventoFechaInicial" /><br />
+                    <label>Fecha Final</label>
+                    <input type="datetime-local" class="form-control" name="EventoFechaFinal" /><br />
+                    <input type="submit" class="float-right btn btn-success" name="" value="Guardar Evento">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

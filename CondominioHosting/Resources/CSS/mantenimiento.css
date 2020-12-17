@@ -1,0 +1,37 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#contratistas{
+    width: 950px;
+    height: 500px;
+    background-color: rgb(202, 196, 196);
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 18px;
+}
+#todo{
+    position: absolute;
+    left: 190px;
+    top: 20px;
+}
+/* #guardarcontratista{
+    position: absolute;
+    right: 1px;
+    top: 390px;
+} */
+#registro{
+    width: 900px;
+    height: 250px;
+    position: relative;
+    left: 10px;
+}
+h5{
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 24px;
+}
+#prop{
+    position: relative;
+    left: 180px;
+    top: -37px;
+}
